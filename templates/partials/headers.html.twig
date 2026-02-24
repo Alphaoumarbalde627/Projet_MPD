@@ -1,0 +1,305 @@
+<!-- Main Header -->
+<header class="bg-white shadow-md sticky top-0 z-50">
+    <div class="container mx-auto px-6">
+        <div class="flex items-center justify-between py-4">
+            <!-- Logo -->
+            <a href="/" class="flex items-center">
+                <div class="w-48 h-20 bg-white flex items-center justify-center">
+                    <img src="/images/Logo.png" alt="Galerie MPD Logo" class="h-full object-contain">
+                </div>
+            </a>
+
+            <!-- Search Bar (Desktop) -->
+            <div class="hidden lg:flex flex-1 max-w-xl mx-8">
+                <div class="relative w-full">
+                    <input type="text" placeholder="Rechercher des produits..." class="w-full px-4 py-3 pl-12 pr-4 border-2 border-gray-200 rounded-full focus:outline-none focus:border-blue-500 transition-colors">
+                    <svg class="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- Right Actions -->
+            <div class="flex items-center gap-3">
+                <!-- Account -->
+                <a href="#" class="hidden md:flex items-center gap-2 px-4 py-2 text-blue-900 hover:text-blue-700 hover:bg-blue-50 rounded-lg transition-all">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                    </svg>
+                    <span class="text-sm font-medium">Compte</span>
+                </a>
+                
+                <!-- Cart -->
+                <a href="#" class="relative flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-lg hover:from-blue-700 hover:to-blue-800 shadow-md hover:shadow-lg transition-all">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
+                    </svg>
+                    <span class="text-sm font-medium">Panier</span>
+                    <span class="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">0</span>
+                </a>
+
+                <!-- Mobile Menu Button -->
+                <button class="lg:hidden p-2 text-blue-900 hover:bg-blue-50 rounded-lg">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Navigation Menu -->
+        <nav class="hidden lg:flex items-center justify-center border-t border-gray-100 py-3">
+            <div class="flex items-center gap-1">
+                <!-- Meubles -->
+                <div class="relative group">
+                    <button class="flex items-center gap-1 px-4 py-2 text-blue-900 font-medium hover:text-blue-700 hover:bg-blue-50 rounded-lg transition-all">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+                        </svg>
+                        <span>Meubles</span>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </button>
+                    <div class="absolute left-0 top-full mt-2 w-56 bg-white rounded-xl shadow-xl border border-gray-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 py-2">
+                        <a href="#" class="flex items-center gap-3 px-4 py-2.5 text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors">
+                            <span class="text-xs">•</span>
+                            <span>Salon</span>
+                        </a>
+                        <a href="#" class="flex items-center gap-3 px-4 py-2.5 text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors">
+                            <span class="text-xs">•</span>
+                            <span>Chambre</span>
+                        </a>
+                        <a href="#" class="flex items-center gap-3 px-4 py-2.5 text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors">
+                            <span class="text-xs">•</span>
+                            <span>Table Apéritif</span>
+                        </a>
+                        <a href="#" class="flex items-center gap-3 px-4 py-2.5 text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors">
+                            <span class="text-xs">•</span>
+                            <span>Table TV</span>
+                        </a>
+                        <a href="#" class="flex items-center gap-3 px-4 py-2.5 text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors">
+                            <span class="text-xs">•</span>
+                            <span>Table à manger</span>
+                        </a>
+                        <a href="#" class="flex items-center gap-3 px-4 py-2.5 text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors">
+                            <span class="text-xs">•</span>
+                            <span>Tapis moquette</span>
+                        </a>
+                        <a href="#" class="flex items-center gap-3 px-4 py-2.5 text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors">
+                            <span class="text-xs">•</span>
+                            <span>Salle à manger</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Mobilier -->
+                <div class="relative group">
+                    <button class="flex items-center gap-1 px-4 py-2 text-blue-900 font-medium hover:text-blue-700 hover:bg-blue-50 rounded-lg transition-all">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                        </svg>
+                        <span>Mobilier</span>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </button>
+                    <div class="absolute left-0 top-full mt-2 w-56 bg-white rounded-xl shadow-xl border border-gray-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 py-2 max-h-96 overflow-y-auto">
+                        <a href="#" class="flex items-center gap-3 px-4 py-2.5 text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors">
+                            <span class="text-xs">•</span>
+                            <span>Bureau d'Accueil</span>
+                        </a>
+                        <a href="#" class="flex items-center gap-3 px-4 py-2.5 text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors">
+                            <span class="text-xs">•</span>
+                            <span>Bureau de Directeur</span>
+                        </a>
+                        <a href="#" class="flex items-center gap-3 px-4 py-2.5 text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors">
+                            <span class="text-xs">•</span>
+                            <span>Bureau de Ministre</span>
+                        </a>
+                        <a href="#" class="flex items-center gap-3 px-4 py-2.5 text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors">
+                            <span class="text-xs">•</span>
+                            <span>Fauteuil haut dossier</span>
+                        </a>
+                        <a href="#" class="flex items-center gap-3 px-4 py-2.5 text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors">
+                            <span class="text-xs">•</span>
+                            <span>Fauteuil bas dossier</span>
+                        </a>
+                        <a href="#" class="flex items-center gap-3 px-4 py-2.5 text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors">
+                            <span class="text-xs">•</span>
+                            <span>Fauteuil haut standing</span>
+                        </a>
+                        <a href="#" class="flex items-center gap-3 px-4 py-2.5 text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors">
+                            <span class="text-xs">•</span>
+                            <span>Chaise visiteur</span>
+                        </a>
+                        <a href="#" class="flex items-center gap-3 px-4 py-2.5 text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors">
+                            <span class="text-xs">•</span>
+                            <span>Salon de bureau</span>
+                        </a>
+                        <a href="#" class="flex items-center gap-3 px-4 py-2.5 text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors">
+                            <span class="text-xs">•</span>
+                            <span>Armoire de bureau</span>
+                        </a>
+                        <a href="#" class="flex items-center gap-3 px-4 py-2.5 text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors">
+                            <span class="text-xs">•</span>
+                            <span>Armoire métallique</span>
+                        </a>
+                        <a href="#" class="flex items-center gap-3 px-4 py-2.5 text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors">
+                            <span class="text-xs">•</span>
+                            <span>Chaise banquette</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Électroménager -->
+                <div class="relative group">
+                    <button class="flex items-center gap-1 px-4 py-2 text-blue-900 font-medium hover:text-blue-700 hover:bg-blue-50 rounded-lg transition-all">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"/>
+                        </svg>
+                        <span>Électroménager</span>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </button>
+                    <div class="absolute left-0 top-full mt-2 w-56 bg-white rounded-xl shadow-xl border border-gray-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 py-2 max-h-96 overflow-y-auto">
+                        <a href="#" class="flex items-center gap-3 px-4 py-2.5 text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors">
+                            <span class="text-xs">•</span>
+                            <span>Congélateur debout</span>
+                        </a>
+                        <a href="#" class="flex items-center gap-3 px-4 py-2.5 text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors">
+                            <span class="text-xs">•</span>
+                            <span>Congélateur couché</span>
+                        </a>
+                        <a href="#" class="flex items-center gap-3 px-4 py-2.5 text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors">
+                            <span class="text-xs">•</span>
+                            <span>Réfrigérateur GM</span>
+                        </a>
+                        <a href="#" class="flex items-center gap-3 px-4 py-2.5 text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors">
+                            <span class="text-xs">•</span>
+                            <span>Réfrigérateur PM</span>
+                        </a>
+                        <a href="#" class="flex items-center gap-3 px-4 py-2.5 text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors">
+                            <span class="text-xs">•</span>
+                            <span>Réfrigérateur double battant</span>
+                        </a>
+                        <a href="#" class="flex items-center gap-3 px-4 py-2.5 text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors">
+                            <span class="text-xs">•</span>
+                            <span>Fontaine à eau</span>
+                        </a>
+                        <a href="#" class="flex items-center gap-3 px-4 py-2.5 text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors">
+                            <span class="text-xs">•</span>
+                            <span>Rice cooker</span>
+                        </a>
+                        <a href="#" class="flex items-center gap-3 px-4 py-2.5 text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors">
+                            <span class="text-xs">•</span>
+                            <span>Cafetière</span>
+                        </a>
+                        <a href="#" class="flex items-center gap-3 px-4 py-2.5 text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors">
+                            <span class="text-xs">•</span>
+                            <span>Micro-ondes</span>
+                        </a>
+                        <a href="#" class="flex items-center gap-3 px-4 py-2.5 text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors">
+                            <span class="text-xs">•</span>
+                            <span>Climatiseur</span>
+                        </a>
+                        <a href="#" class="flex items-center gap-3 px-4 py-2.5 text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors">
+                            <span class="text-xs">•</span>
+                            <span>Mixeur</span>
+                        </a>
+                        <a href="#" class="flex items-center gap-3 px-4 py-2.5 text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors">
+                            <span class="text-xs">•</span>
+                            <span>Machine à laver</span>
+                        </a>
+                        <a href="#" class="flex items-center gap-3 px-4 py-2.5 text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors">
+                            <span class="text-xs">•</span>
+                            <span>Cuisinière</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Informatique -->
+                <div class="relative group">
+                    <button class="flex items-center gap-1 px-4 py-2 text-blue-900 font-medium hover:text-blue-700 hover:bg-blue-50 rounded-lg transition-all">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                        </svg>
+                        <span>Informatique</span>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </button>
+                    <div class="absolute left-0 top-full mt-2 w-56 bg-white rounded-xl shadow-xl border border-gray-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 py-2">
+                        <a href="#" class="flex items-center gap-3 px-4 py-2.5 text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors">
+                            <span class="text-xs">•</span>
+                            <span>Ordinateur PC/Bureau</span>
+                        </a>
+                        <a href="#" class="flex items-center gap-3 px-4 py-2.5 text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors">
+                            <span class="text-xs">•</span>
+                            <span>Imprimante</span>
+                        </a>
+                        <a href="#" class="flex items-center gap-3 px-4 py-2.5 text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors">
+                            <span class="text-xs">•</span>
+                            <span>Clavier</span>
+                        </a>
+                        <a href="#" class="flex items-center gap-3 px-4 py-2.5 text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors">
+                            <span class="text-xs">•</span>
+                            <span>Souris</span>
+                        </a>
+                        <a href="#" class="flex items-center gap-3 px-4 py-2.5 text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors">
+                            <span class="text-xs">•</span>
+                            <span>Écran</span>
+                        </a>
+                        <a href="#" class="flex items-center gap-3 px-4 py-2.5 text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors">
+                            <span class="text-xs">•</span>
+                            <span>Projecteur</span>
+                        </a>
+                        <a href="#" class="flex items-center gap-3 px-4 py-2.5 text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors">
+                            <span class="text-xs">•</span>
+                            <span>Photocopieuse</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Service -->
+                <div class="relative group">
+                    <button class="flex items-center gap-1 px-4 py-2 text-blue-900 font-medium hover:text-blue-700 hover:bg-blue-50 rounded-lg transition-all">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                        </svg>
+                        <span>Services</span>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </button>
+                    <div class="absolute left-0 top-full mt-2 w-64 bg-white rounded-xl shadow-xl border border-gray-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 py-2">
+                        <a href="#" class="flex items-center gap-3 px-4 py-2.5 text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors">
+                            <span class="text-xs">•</span>
+                            <span>Service Après Vente</span>
+                        </a>
+                        <a href="#" class="flex items-center gap-3 px-4 py-2.5 text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors">
+                            <span class="text-xs">•</span>
+                            <span>Déménagement Meuble/Mobilier</span>
+                        </a>
+                        <a href="#" class="flex items-center gap-3 px-4 py-2.5 text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors">
+                            <span class="text-xs">•</span>
+                            <span>Maintenance Informatique</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- À propos -->
+                <a href="#" class="flex items-center gap-1 px-4 py-2 text-blue-900 font-medium hover:text-blue-700 hover:bg-blue-50 rounded-lg transition-all">
+                    <span>À propos</span>
+                </a>
+
+                <!-- Témoignages -->
+                <a href="#" class="flex items-center gap-1 px-4 py-2 text-blue-900 font-medium hover:text-blue-700 hover:bg-blue-50 rounded-lg transition-all">
+                    <span>Témoignages</span>
+                </a>
+            </div>
+        </nav>
+    </div>
+</header>

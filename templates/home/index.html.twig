@@ -1,0 +1,411 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil - Galerie MPD{% endblock %}
+
+{% block body %}
+
+{% include 'partials/headers.html.twig' %}
+
+<!-- Hero -->
+<section class="bg-white">
+    <div class="container mx-auto px-6 py-20 lg:py-28">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div>
+                <h2 class="text-4xl sm:text-5xl font-extrabold text-blue-900 mb-4">Meubles,Mobilier de Bureau, Électroménager et Informatique de qualité</h2>
+                <p class="text-lg text-gray-600 mb-8">Découvrez une sélection soignée de produits et services, conçus pour votre confort et vos projets professionnels ou personnels.</p>
+                <div class="flex flex-wrap gap-3">
+                    <a href="#" class="px-6 py-3 bg-blue-700 text-white rounded-md">Voir les produits</a>
+                    <a href="#" class="px-6 py-3 bg-white text-blue-700 border border-blue-200 rounded-md">Nos services</a>
+                    <a href="#" class="px-6 py-3 bg-blue-50 text-blue-800 rounded-md">Contactez-nous</a>
+                </div>
+            </div>
+            <div class="w-full">
+                <div class="w-full h-96 bg-gradient-to-br from-blue-50 to-white rounded-lg flex items-center justify-center overflow-hidden">
+                    <video class="w-full h-full object-cover rounded-lg" autoplay muted loop playsinline controls>
+                        <source src="/videos/videos.mp4" type="video/mp4">
+                        Votre navigateur ne supporte pas la vidéo.
+                    </video>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Categories -->
+<section class="bg-gradient-to-b from-blue-50 to-white">
+    <div class="container mx-auto px-6 py-20">
+        <div class="text-center mb-12">
+            <h3 class="text-3xl font-bold text-blue-900 mb-3">Explorez nos catégories</h3>
+            <p class="text-gray-600 text-lg">Découvrez notre large gamme de produits et services</p>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+            <!-- Meubles -->
+            <a href="#" class="group relative bg-gradient-to-br from-blue-500 to-blue-700 p-8 rounded-2xl shadow-lg hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 overflow-hidden">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-white opacity-10 rounded-full -mr-16 -mt-16"></div>
+                <div class="relative z-10">
+                    <div class="w-16 h-16 bg-white bg-opacity-20 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                        <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+                        </svg>
+                    </div>
+                    <div class="text-2xl font-bold text-white mb-2">Meubles</div>
+                    <p class="text-sm text-blue-100">Salon, Chambre, Bureau</p>
+                    <div class="mt-4 flex items-center text-white text-sm font-medium">
+                        <span>Explorer</span>
+                        <svg class="w-4 h-4 ml-2 group-hover:translate-x-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                        </svg>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Mobilier -->
+            <a href="#" class="group relative bg-gradient-to-br from-indigo-500 to-indigo-700 p-8 rounded-2xl shadow-lg hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 overflow-hidden">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-white opacity-10 rounded-full -mr-16 -mt-16"></div>
+                <div class="relative z-10">
+                    <div class="w-16 h-16 bg-white bg-opacity-20 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                        <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/>
+                        </svg>
+                    </div>
+                    <div class="text-2xl font-bold text-white mb-2">Mobilier</div>
+                    <p class="text-sm text-indigo-100">Bureau, Fauteuil, Chaise</p>
+                    <div class="mt-4 flex items-center text-white text-sm font-medium">
+                        <span>Explorer</span>
+                        <svg class="w-4 h-4 ml-2 group-hover:translate-x-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                        </svg>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Électroménager -->
+            <a href="#" class="group relative bg-gradient-to-br from-purple-500 to-purple-700 p-8 rounded-2xl shadow-lg hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 overflow-hidden">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-white opacity-10 rounded-full -mr-16 -mt-16"></div>
+                <div class="relative z-10">
+                    <div class="w-16 h-16 bg-white bg-opacity-20 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                        <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"/>
+                        </svg>
+                    </div>
+                    <div class="text-2xl font-bold text-white mb-2">Électroménager</div>
+                    <p class="text-sm text-purple-100">Cuisine, Entretien, Clim</p>
+                    <div class="mt-4 flex items-center text-white text-sm font-medium">
+                        <span>Explorer</span>
+                        <svg class="w-4 h-4 ml-2 group-hover:translate-x-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                        </svg>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Informatique -->
+            <a href="#" class="group relative bg-gradient-to-br from-cyan-500 to-cyan-700 p-8 rounded-2xl shadow-lg hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 overflow-hidden">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-white opacity-10 rounded-full -mr-16 -mt-16"></div>
+                <div class="relative z-10">
+                    <div class="w-16 h-16 bg-white bg-opacity-20 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                        <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                        </svg>
+                    </div>
+                    <div class="text-2xl font-bold text-white mb-2">Informatique</div>
+                    <p class="text-sm text-cyan-100">PC, Périphériques, Tech</p>
+                    <div class="mt-4 flex items-center text-white text-sm font-medium">
+                        <span>Explorer</span>
+                        <svg class="w-4 h-4 ml-2 group-hover:translate-x-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                        </svg>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Services -->
+            <a href="#" class="group relative bg-gradient-to-br from-teal-500 to-teal-700 p-8 rounded-2xl shadow-lg hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 overflow-hidden">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-white opacity-10 rounded-full -mr-16 -mt-16"></div>
+                <div class="relative z-10">
+                    <div class="w-16 h-16 bg-white bg-opacity-20 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                        <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                        </svg>
+                    </div>
+                    <div class="text-2xl font-bold text-white mb-2">Services</div>
+                    <p class="text-sm text-teal-100">Installation, Maintenance</p>
+                    <div class="mt-4 flex items-center text-white text-sm font-medium">
+                        <span>Explorer</span>
+                        <svg class="w-4 h-4 ml-2 group-hover:translate-x-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                        </svg>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Features / How it works -->
+<section class="bg-gradient-to-b from-white to-blue-50 relative overflow-hidden">
+    <!-- Decorative background elements -->
+    <div class="absolute top-0 left-0 w-96 h-96 bg-blue-100 rounded-full opacity-20 -ml-48 -mt-48"></div>
+    <div class="absolute bottom-0 right-0 w-96 h-96 bg-purple-100 rounded-full opacity-20 -mr-48 -mb-48"></div>
+    
+    <div class="container mx-auto px-6 py-20 relative z-10">
+        <div class="max-w-4xl mx-auto text-center mb-16">
+            <h4 class="text-4xl font-bold text-blue-900 mb-4">Comment ça marche ?</h4>
+            <p class="text-gray-600 text-lg">Processus simple et rapide pour commander et recevoir vos produits</p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12 max-w-6xl mx-auto">
+            <!-- Étape 1 -->
+            <div class="relative group">
+                <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-3">
+                    <!-- Badge numéro -->
+                    <div class="absolute -top-6 left-1/2 transform -translate-x-1/2">
+                        <div class="w-14 h-14 bg-gradient-to-br from-blue-500 to-blue-700 rounded-full flex items-center justify-center shadow-lg ring-4 ring-white">
+                            <span class="text-2xl font-bold text-white">1</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Icône -->
+                    <div class="mt-8 mb-6 flex justify-center">
+                        <div class="w-20 h-20 bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                            <svg class="w-12 h-12 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                            </svg>
+                        </div>
+                    </div>
+                    
+                    <h5 class="text-2xl font-bold text-blue-900 mb-3 text-center">Parcourir</h5>
+                    <p class="text-gray-600 text-center leading-relaxed">Explorez notre catalogue et sélectionnez les produits qui vous intéressent parmi nos différentes catégories</p>
+                </div>
+                
+                <!-- Flèche de connexion (cachée sur mobile) -->
+                <div class="hidden md:block absolute top-20 -right-6 lg:-right-10 text-blue-300">
+                    <svg class="w-12 h-12 lg:w-16 lg:h-16" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M13.025 1l-2.847 2.828 6.176 6.176h-16.354v3.992h16.354l-6.176 6.176 2.847 2.828 10.975-11z"/>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- Étape 2 -->
+            <div class="relative group">
+                <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-3">
+                    <!-- Badge numéro -->
+                    <div class="absolute -top-6 left-1/2 transform -translate-x-1/2">
+                        <div class="w-14 h-14 bg-gradient-to-br from-purple-500 to-purple-700 rounded-full flex items-center justify-center shadow-lg ring-4 ring-white">
+                            <span class="text-2xl font-bold text-white">2</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Icône -->
+                    <div class="mt-8 mb-6 flex justify-center">
+                        <div class="w-20 h-20 bg-gradient-to-br from-purple-50 to-purple-100 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                            <svg class="w-12 h-12 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
+                            </svg>
+                        </div>
+                    </div>
+                    
+                    <h5 class="text-2xl font-bold text-blue-900 mb-3 text-center">Ajouter au Panier</h5>
+                    <p class="text-gray-600 text-center leading-relaxed">Ajoutez vos articles au panier, ajustez les quantités et vérifiez votre sélection avant validation</p>
+                </div>
+                
+                <!-- Flèche de connexion (cachée sur mobile) -->
+                <div class="hidden md:block absolute top-20 -right-6 lg:-right-10 text-purple-300">
+                    <svg class="w-12 h-12 lg:w-16 lg:h-16" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M13.025 1l-2.847 2.828 6.176 6.176h-16.354v3.992h16.354l-6.176 6.176 2.847 2.828 10.975-11z"/>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- Étape 3 -->
+            <div class="relative group">
+                <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-3">
+                    <!-- Badge numéro -->
+                    <div class="absolute -top-6 left-1/2 transform -translate-x-1/2">
+                        <div class="w-14 h-14 bg-gradient-to-br from-green-500 to-green-700 rounded-full flex items-center justify-center shadow-lg ring-4 ring-white">
+                            <span class="text-2xl font-bold text-white">3</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Icône -->
+                    <div class="mt-8 mb-6 flex justify-center">
+                        <div class="w-20 h-20 bg-gradient-to-br from-green-50 to-green-100 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                            <svg class="w-12 h-12 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"/>
+                            </svg>
+                        </div>
+                    </div>
+                    
+                    <h5 class="text-2xl font-bold text-blue-900 mb-3 text-center">Paiement & Livraison</h5>
+                    <p class="text-gray-600 text-center leading-relaxed">Finalisez votre commande et profitez d'une livraison rapide avec suivi par notre équipe professionnelle</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Call to action -->
+        <div class="text-center mt-16">
+            <a href="#" class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold rounded-full shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300">
+                <span>Commencer vos achats</span>
+                <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+                </svg>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Témoignages -->
+<section class="bg-gradient-to-b from-blue-50 to-white relative overflow-hidden">
+    <!-- Decorative elements -->
+    <div class="absolute top-0 right-0 w-64 h-64 bg-yellow-100 rounded-full opacity-20 -mr-32 -mt-32"></div>
+    <div class="absolute bottom-0 left-0 w-96 h-96 bg-blue-100 rounded-full opacity-20 -ml-48 -mb-48"></div>
+    
+    <div class="container mx-auto px-6 py-20 relative z-10">
+        <div class="max-w-4xl mx-auto text-center mb-16">
+            <div class="inline-block mb-4">
+                <span class="px-4 py-2 bg-yellow-100 text-yellow-800 rounded-full text-sm font-semibold">Témoignages</span>
+            </div>
+            <h4 class="text-4xl font-bold text-blue-900 mb-4">Ce que nos clients disent</h4>
+            <p class="text-gray-600 text-lg">Découvrez les témoignages vidéo de nos clients satisfaits</p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto">
+            <!-- Témoignage 1 -->
+            <div class="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 overflow-hidden">
+                <div class="relative h-56 bg-gradient-to-br from-blue-100 to-blue-50 overflow-hidden">
+                    <video class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" controls>
+                        <source src="/videos/temoignage1.mp4" type="video/mp4">
+                        Votre navigateur ne supporte pas la vidéo.
+                    </video>
+                    <!-- Play overlay -->
+                    <div class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-20 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+                        <div class="w-16 h-16 bg-white bg-opacity-90 rounded-full flex items-center justify-center">
+                            <svg class="w-8 h-8 text-blue-600 ml-1" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M8 5v14l11-7z"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-14 h-14 bg-gradient-to-br from-blue-500 to-blue-700 rounded-full flex items-center justify-center text-white font-bold text-xl shadow-md">M</div>
+                        <div class="ml-4">
+                            <div class="font-bold text-blue-900 text-lg">Mohamed S.</div>
+                            <div class="text-sm text-gray-500">Client particulier</div>
+                        </div>
+                    </div>
+                    <div class="flex mb-3">
+                        <span class="text-yellow-400 text-lg">★★★★★</span>
+                    </div>
+                    <p class="text-gray-600 leading-relaxed italic">"Excellent service ! J'ai acheté un ensemble de salon et l'équipe a été très professionnelle. Livraison rapide et installation impeccable."</p>
+                    <div class="mt-4 pt-4 border-t border-gray-100">
+                        <span class="text-xs text-gray-400">Il y a 2 semaines</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Témoignage 2 -->
+            <div class="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 overflow-hidden">
+                <div class="relative h-56 bg-gradient-to-br from-purple-100 to-purple-50 overflow-hidden">
+                    <video class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" controls>
+                        <source src="/videos/temoignage2.mp4" type="video/mp4">
+                        Votre navigateur ne supporte pas la vidéo.
+                    </video>
+                    <!-- Play overlay -->
+                    <div class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-20 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+                        <div class="w-16 h-16 bg-white bg-opacity-90 rounded-full flex items-center justify-center">
+                            <svg class="w-8 h-8 text-purple-600 ml-1" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M8 5v14l11-7z"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-14 h-14 bg-gradient-to-br from-purple-500 to-purple-700 rounded-full flex items-center justify-center text-white font-bold text-xl shadow-md">A</div>
+                        <div class="ml-4">
+                            <div class="font-bold text-blue-900 text-lg">Aïssatou D.</div>
+                            <div class="text-sm text-gray-500">Directrice d'entreprise</div>
+                        </div>
+                    </div>
+                    <div class="flex mb-3">
+                        <span class="text-yellow-400 text-lg">★★★★★</span>
+                    </div>
+                    <p class="text-gray-600 leading-relaxed italic">"Nous avons équipé tout notre bureau avec MPD. Qualité impeccable et service après-vente au top ! Je recommande vivement."</p>
+                    <div class="mt-4 pt-4 border-t border-gray-100">
+                        <span class="text-xs text-gray-400">Il y a 1 mois</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Témoignage 3 -->
+            <div class="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 overflow-hidden">
+                <div class="relative h-56 bg-gradient-to-br from-cyan-100 to-cyan-50 overflow-hidden">
+                    <video class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" controls>
+                        <source src="/videos/temoignage3.mp4" type="video/mp4">
+                        Votre navigateur ne supporte pas la vidéo.
+                    </video>
+                    <!-- Play overlay -->
+                    <div class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-20 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+                        <div class="w-16 h-16 bg-white bg-opacity-90 rounded-full flex items-center justify-center">
+                            <svg class="w-8 h-8 text-cyan-600 ml-1" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M8 5v14l11-7z"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-14 h-14 bg-gradient-to-br from-cyan-500 to-cyan-700 rounded-full flex items-center justify-center text-white font-bold text-xl shadow-md">I</div>
+                        <div class="ml-4">
+                            <div class="font-bold text-blue-900 text-lg">Ibrahim K.</div>
+                            <div class="text-sm text-gray-500">Développeur</div>
+                        </div>
+                    </div>
+                    <div class="flex mb-3">
+                        <span class="text-yellow-400 text-lg">★★★★★</span>
+                    </div>
+                    <p class="text-gray-600 leading-relaxed italic">"Matériel informatique de qualité à des prix compétitifs. L'équipe technique m'a bien conseillé. Très satisfait de mon achat."</p>
+                    <div class="mt-4 pt-4 border-t border-gray-100">
+                        <span class="text-xs text-gray-400">Il y a 3 semaines</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stats Section -->
+        <div class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6 max-w-5xl mx-auto">
+            <div class="text-center p-6 bg-white rounded-xl shadow-md">
+                <div class="text-4xl font-bold text-blue-900 mb-2">500+</div>
+                <div class="text-gray-600 text-sm">Clients satisfaits</div>
+            </div>
+            <div class="text-center p-6 bg-white rounded-xl shadow-md">
+                <div class="text-4xl font-bold text-blue-900 mb-2">4.9/5</div>
+                <div class="text-gray-600 text-sm">Note moyenne</div>
+            </div>
+            <div class="text-center p-6 bg-white rounded-xl shadow-md">
+                <div class="text-4xl font-bold text-blue-900 mb-2">98%</div>
+                <div class="text-gray-600 text-sm">Recommandations</div>
+            </div>
+            <div class="text-center p-6 bg-white rounded-xl shadow-md">
+                <div class="text-4xl font-bold text-blue-900 mb-2">1000+</div>
+                <div class="text-gray-600 text-sm">Produits livrés</div>
+            </div>
+        </div>
+
+        <!-- Call to action -->
+        <div class="text-center mt-12">
+            <a href="#" class="inline-flex items-center text-blue-600 hover:text-blue-700 font-semibold transition-colors">
+                <span>Voir tous les avis</span>
+                <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                </svg>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+{% include 'partials/footer.html.twig' %}
+{% endblock %}

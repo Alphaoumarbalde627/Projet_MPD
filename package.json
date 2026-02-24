@@ -1,0 +1,14 @@
+{
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.2.0",
+    "autoprefixer": "^10.4.24",
+    "postcss": "^8.5.6",
+    "postcss-cli": "^11.0.1",
+    "tailwindcss": "^4.2.0"
+  },
+  "scripts": {
+    "tailwind:init": "tailwindcss init",
+    "tailwind:build": "postcss ./assets/styles/app.css -o ./public/build/app.css",
+    "tailwind:watch": "postcss ./assets/styles/app.css -o ./public/build/app.css --watch"
+  }
+}
