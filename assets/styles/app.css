@@ -1,3 +1,5 @@
-body {
-    background-color: skyblue;
+@import "tailwindcss";
+
+@layer components {
+  /* Utility layer for custom components if needed */
 }
