@@ -20,8 +20,8 @@ class Promotion
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
 
-    #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 0)]
-    private ?string $pourcentage_reduc = null;
+    #[ORM\Column(type: Types::INTEGER)]
+    private ?int $pourcentage_reduc = null;
 
     #[ORM\Column]
     private ?\DateTime $date_debut = null;
@@ -74,12 +74,12 @@ class Promotion
         return $this;
     }
 
-    public function getPourcentageReduc(): ?string
+    public function getPourcentageReduc(): ?int
     {
         return $this->pourcentage_reduc;
     }
 
-    public function setPourcentageReduc(string $pourcentage_reduc): static
+    public function setPourcentageReduc(int $pourcentage_reduc): static
     {
         $this->pourcentage_reduc = $pourcentage_reduc;
 

@@ -23,7 +23,7 @@ class Panier
     #[ORM\Column]
     private ?\DateTimeImmutable $updated_at = null;
 
-    #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 0)]
+    #[ORM\Column(type: Types::DECIMAL, precision: 15, scale: 2)]
     private ?string $prix_unitaire = null;
 
     public function getId(): ?int

@@ -15,7 +15,7 @@ class Commande
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 0)]
+    #[ORM\Column(type: Types::DECIMAL, precision: 15, scale: 2)]
     private ?string $montant_total = null;
 
     #[ORM\Column(nullable: true, enumType: StatutCom::class)]
