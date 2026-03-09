@@ -142,12 +142,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function getRoles(): array
     {
-        // convert our Statut enum to Symfony role strings
+        $roles = ['ROLE_USER'];
+
         if ($this->role instanceof Statut && $this->role->value === Statut::ADMIN->value) {
-            return ['ROLE_ADMIN'];
+            $roles[] = 'ROLE_ADMIN';
         }
 
-        return ['ROLE_USER'];
+        return array_values(array_unique($roles));
     }
 
     /**
