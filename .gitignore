@@ -8,7 +8,11 @@
 /var/
 /vendor/
 ###< symfony/framework-bundle ###
+# Node
+/node_modules/
 
+# Build Tailwind
+/public/build/
 ###> phpunit/phpunit ###
 /phpunit.xml
 /.phpunit.cache/
@@ -18,3 +22,6 @@
 /public/assets/
 /assets/vendor/
 ###< symfony/asset-mapper ###
+
+
+/.env
