@@ -1,0 +1,10 @@
+# Messages d'authentification / sécurité
+
+"Invalid credentials.": "Identifiants invalides."
+"Username could not be found.": "Utilisateur introuvable."
+"Account is disabled.": "Ce compte est désactivé."
+"Account is locked.": "Ce compte est verrouillé."
+"Too many failed login attempts, please try again in %minutes% minute.": "Trop de tentatives de connexion échouées, veuillez réessayer dans %minutes% minute."
+"Too many failed login attempts, please try again in %minutes% minutes.": "Trop de tentatives de connexion échouées, veuillez réessayer dans %minutes% minutes."
+"Too many failed login attempts, please try again in %seconds% second.": "Trop de tentatives de connexion échouées, veuillez réessayer dans %seconds% seconde."
+"Too many failed login attempts, please try again in %seconds% seconds.": "Trop de tentatives de connexion échouées, veuillez réessayer dans %seconds% secondes."

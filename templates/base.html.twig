@@ -16,11 +16,36 @@
     <body>
         {% for label, messages in app.flashes %}
             {% for message in messages %}
-                <div class="fixed top-4 right-4 z-50 max-w-sm px-4 py-3 rounded-lg shadow-lg {{ label == 'success' ? 'bg-green-600 text-white' : label == 'error' ? 'bg-red-600 text-white' : 'bg-blue-600 text-white' }}">
+                <div data-flash-message class="fixed top-24 right-4 z-[100] max-w-sm px-4 py-3 rounded-lg shadow-lg transition-opacity duration-500 {{ label == 'success' ? 'bg-green-600 text-white' : label == 'error' ? 'bg-red-600 text-white' : 'bg-blue-600 text-white' }}">
                     {{ message }}
                 </div>
             {% endfor %}
         {% endfor %}
         {% block body %}{% endblock %}
+        <script>
+            function initFlashAutoDismiss() {
+                const flashMessages = document.querySelectorAll('[data-flash-message]');
+
+                flashMessages.forEach(function (messageElement, index) {
+                    if (messageElement.dataset.dismissBound === 'true') {
+                        return;
+                    }
+
+                    messageElement.dataset.dismissBound = 'true';
+                    const delay = 5000 + (index * 150);
+
+                    setTimeout(function () {
+                        messageElement.classList.add('opacity-0');
+
+                        setTimeout(function () {
+                            messageElement.remove();
+                        }, 500);
+                    }, delay);
+                });
+            }
+
+            document.addEventListener('DOMContentLoaded', initFlashAutoDismiss);
+            document.addEventListener('turbo:load', initFlashAutoDismiss);
+        </script>
     </body>
 </html>
