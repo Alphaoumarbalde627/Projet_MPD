@@ -14,6 +14,13 @@
         {% endblock %}
     </head>
     <body>
+        {% for label, messages in app.flashes %}
+            {% for message in messages %}
+                <div class="fixed top-4 right-4 z-50 max-w-sm px-4 py-3 rounded-lg shadow-lg {{ label == 'success' ? 'bg-green-600 text-white' : label == 'error' ? 'bg-red-600 text-white' : 'bg-blue-600 text-white' }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endfor %}
         {% block body %}{% endblock %}
     </body>
 </html>
