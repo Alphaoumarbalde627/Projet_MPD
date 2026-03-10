@@ -4,6 +4,9 @@
 
 {% block body %}
 {% include 'partials/headers.html.twig' %}
+{% if recaptcha_site_key is not empty %}
+    <script src="https://www.google.com/recaptcha/api.js?render={{ recaptcha_site_key }}" async defer></script>
+{% endif %}
 <div class="min-h-screen bg-gray-100 pt-16 pb-10 flex flex-col justify-center sm:pt-20 sm:pb-12">
     <div class="relative py-3 w-full max-w-md mx-auto px-3 sm:px-4">
         <div class="absolute inset-0 bg-gradient-to-r from-blue-700 via-blue-800 to-blue-900 shadow-2xl transform -skew-y-3 sm:skew-y-0 sm:-rotate-3 sm:rounded-3xl opacity-95"></div>
@@ -23,6 +26,11 @@
 
                 <form method="post" action="{{ path('app_login') }}" class="space-y-4" data-turbo="false">
                     <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                    <input type="hidden" name="recaptcha_token" id="recaptcha_token">
+
+                    <div id="recaptcha-feedback" class="hidden px-3 py-2 rounded-lg text-xs font-medium bg-red-50 text-red-800 border border-red-200">
+                        La verification reCAPTCHA a echoue. Veuillez reessayer.
+                    </div>
 
                     <div class="relative">
                         <label for="email" class="block text-xs font-medium text-gray-700 mb-1">Adresse email</label>
@@ -105,16 +113,70 @@
     </div>
 </div>
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
+    const initLoginPage = function () {
+        const loginForm = document.querySelector('form[action="{{ path('app_login') }}"]');
+        const recaptchaTokenInput = document.getElementById('recaptcha_token');
+        const recaptchaFeedback = document.getElementById('recaptcha-feedback');
+        const recaptchaSiteKey = '{{ recaptcha_site_key|e('js') }}';
+        let canSubmit = false;
+
         const passwordInput = document.getElementById('password');
         const toggleButton = document.getElementById('toggle-password');
         const eyeOpen = document.getElementById('eye-open');
         const eyeClosed = document.getElementById('eye-closed');
 
+        const showRecaptchaError = function () {
+            if (recaptchaFeedback) {
+                recaptchaFeedback.classList.remove('hidden');
+            }
+        };
+
+        if (loginForm && recaptchaTokenInput && !loginForm.dataset.recaptchaBound) {
+            loginForm.dataset.recaptchaBound = '1';
+            loginForm.addEventListener('submit', function (event) {
+                if (canSubmit) {
+                    return;
+                }
+
+                event.preventDefault();
+
+                if (recaptchaFeedback) {
+                    recaptchaFeedback.classList.add('hidden');
+                }
+
+                if (!recaptchaSiteKey || typeof grecaptcha === 'undefined') {
+                    showRecaptchaError();
+                    return;
+                }
+
+                grecaptcha.ready(function () {
+                    grecaptcha.execute(recaptchaSiteKey, { action: 'login_submit' })
+                        .then(function (token) {
+                            if (!token) {
+                                showRecaptchaError();
+                                return;
+                            }
+
+                            recaptchaTokenInput.value = token;
+                            canSubmit = true;
+                            loginForm.submit();
+                        })
+                        .catch(function () {
+                            showRecaptchaError();
+                        });
+                });
+            });
+        }
+
         if (!passwordInput || !toggleButton || !eyeOpen || !eyeClosed) {
             return;
         }
 
+        if (toggleButton.dataset.passwordToggleBound) {
+            return;
+        }
+
+        toggleButton.dataset.passwordToggleBound = '1';
         toggleButton.addEventListener('click', function () {
             const isHidden = passwordInput.type === 'password';
             passwordInput.type = isHidden ? 'text' : 'password';
@@ -123,7 +185,10 @@
             eyeOpen.classList.toggle('hidden', isHidden);
             eyeClosed.classList.toggle('hidden', !isHidden);
         });
-    });
+    };
+
+    document.addEventListener('DOMContentLoaded', initLoginPage);
+    document.addEventListener('turbo:load', initLoginPage);
 </script>
 {% include 'partials/footer.html.twig' %}
 {% endblock %}
