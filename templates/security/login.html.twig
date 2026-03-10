@@ -113,82 +113,95 @@
     </div>
 </div>
 <script>
-    const initLoginPage = function () {
-        const loginForm = document.querySelector('form[action="{{ path('app_login') }}"]');
-        const recaptchaTokenInput = document.getElementById('recaptcha_token');
-        const recaptchaFeedback = document.getElementById('recaptcha-feedback');
-        const recaptchaSiteKey = '{{ recaptcha_site_key|e('js') }}';
-        let canSubmit = false;
+const initLoginPage = function () {
+    const loginForm = document.querySelector('form[action="{{ path('app_login') }}"]');
+    const recaptchaTokenInput = document.getElementById('recaptcha_token');
+    const recaptchaFeedback = document.getElementById('recaptcha-feedback');
+    const recaptchaSiteKey = '{{ recaptcha_site_key|e('js') }}';
+    let canSubmit = false;
 
-        const passwordInput = document.getElementById('password');
-        const toggleButton = document.getElementById('toggle-password');
-        const eyeOpen = document.getElementById('eye-open');
-        const eyeClosed = document.getElementById('eye-closed');
-
-        const showRecaptchaError = function () {
-            if (recaptchaFeedback) {
-                recaptchaFeedback.classList.remove('hidden');
-            }
-        };
-
-        if (loginForm && recaptchaTokenInput && !loginForm.dataset.recaptchaBound) {
-            loginForm.dataset.recaptchaBound = '1';
-            loginForm.addEventListener('submit', function (event) {
-                if (canSubmit) {
-                    return;
-                }
-
-                event.preventDefault();
-
-                if (recaptchaFeedback) {
-                    recaptchaFeedback.classList.add('hidden');
-                }
-
-                if (!recaptchaSiteKey || typeof grecaptcha === 'undefined') {
-                    showRecaptchaError();
-                    return;
-                }
-
-                grecaptcha.ready(function () {
-                    grecaptcha.execute(recaptchaSiteKey, { action: 'login_submit' })
-                        .then(function (token) {
-                            if (!token) {
-                                showRecaptchaError();
-                                return;
-                            }
-
-                            recaptchaTokenInput.value = token;
-                            canSubmit = true;
-                            loginForm.submit();
-                        })
-                        .catch(function () {
-                            showRecaptchaError();
-                        });
-                });
-            });
+    const showRecaptchaError = function () {
+        if (recaptchaFeedback) {
+            recaptchaFeedback.classList.remove('hidden');
         }
-
-        if (!passwordInput || !toggleButton || !eyeOpen || !eyeClosed) {
-            return;
-        }
-
-        if (toggleButton.dataset.passwordToggleBound) {
-            return;
-        }
-
-        toggleButton.dataset.passwordToggleBound = '1';
-        toggleButton.addEventListener('click', function () {
-            const isHidden = passwordInput.type === 'password';
-            passwordInput.type = isHidden ? 'text' : 'password';
-            toggleButton.setAttribute('aria-pressed', String(isHidden));
-            toggleButton.setAttribute('aria-label', isHidden ? 'Masquer le mot de passe' : 'Afficher le mot de passe');
-            eyeOpen.classList.toggle('hidden', isHidden);
-            eyeClosed.classList.toggle('hidden', !isHidden);
-        });
     };
 
-    document.addEventListener('DOMContentLoaded', initLoginPage);
-    document.addEventListener('turbo:load', initLoginPage);
+    if (loginForm && recaptchaTokenInput && !loginForm.dataset.recaptchaBound) {
+        loginForm.dataset.recaptchaBound = '1';
+
+        loginForm.addEventListener('submit', function (event) {
+            if (canSubmit) {
+                return;
+            }
+
+            event.preventDefault();
+
+            if (recaptchaFeedback) {
+                recaptchaFeedback.classList.add('hidden');
+            }
+
+            if (!recaptchaSiteKey || typeof grecaptcha === 'undefined') {
+                showRecaptchaError();
+                return;
+            }
+
+            grecaptcha.ready(function () {
+                grecaptcha.execute(recaptchaSiteKey, { action: 'login_submit' })
+                    .then(function (token) {
+                        if (!token) {
+                            showRecaptchaError();
+                            return;
+                        }
+
+                        recaptchaTokenInput.value = token;
+                        canSubmit = true;
+                        loginForm.submit();
+                    })
+                    .catch(function () {
+                        showRecaptchaError();
+                    });
+            });
+        });
+    }
+};
+
+function initLoginPasswordToggle() {
+    const passwordInput = document.getElementById('password');
+    const toggleButton = document.getElementById('toggle-password');
+    const eyeOpen = document.getElementById('eye-open');
+    const eyeClosed = document.getElementById('eye-closed');
+
+    if (!passwordInput || !toggleButton || !eyeOpen || !eyeClosed) {
+        return;
+    }
+
+    if (toggleButton.dataset.toggleBound === 'true') {
+        return;
+    }
+
+    toggleButton.dataset.toggleBound = 'true';
+
+    toggleButton.addEventListener('click', function () {
+        const isHidden = passwordInput.type === 'password';
+
+        passwordInput.type = isHidden ? 'text' : 'password';
+
+        toggleButton.setAttribute('aria-pressed', String(isHidden));
+        toggleButton.setAttribute(
+            'aria-label',
+            isHidden ? 'Masquer le mot de passe' : 'Afficher le mot de passe'
+        );
+
+        eyeOpen.classList.toggle('hidden', isHidden);
+        eyeClosed.classList.toggle('hidden', !isHidden);
+    });
+}
+
+document.addEventListener('DOMContentLoaded', initLoginPage);
+document.addEventListener('turbo:load', initLoginPage);
+
+document.addEventListener('DOMContentLoaded', initLoginPasswordToggle);
+document.addEventListener('turbo:load', initLoginPasswordToggle);
 </script>
 {% include 'partials/footer.html.twig' %}
 {% endblock %}

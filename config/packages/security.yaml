@@ -2,6 +2,8 @@ security:
     # https://symfony.com/doc/current/security.html#registering-the-user-hashing-passwords
     password_hashers:
         Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
+    role_hierarchy:
+        ROLE_ADMIN: [ROLE_USER]
     # https://symfony.com/doc/current/security.html#loading-the-user-the-user-provider
     providers:
         app_user_provider:
@@ -25,9 +27,11 @@ security:
                 csrf_token_id: authenticate
                 csrf_parameter: _csrf_token
                 default_target_path: app_home
+                success_handler: App\Security\RoleBasedLoginSuccessHandler
             logout:
                 path: /logout
                 target: app_home
+                invalidate_session: true
 
     access_control:
         - { path: ^/login, roles: PUBLIC_ACCESS }
