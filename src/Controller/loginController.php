@@ -13,6 +13,10 @@ final class loginController extends AbstractController
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
         if ($this->getUser()) {
+            if ($this->isGranted('ROLE_ADMIN')) {
+                return $this->redirectToRoute('app_admin_dashboard');
+            }
+
             return $this->redirectToRoute('app_home');
         }
 
@@ -22,6 +26,7 @@ final class loginController extends AbstractController
         return $this->render('security/login.html.twig', [
             'last_username' => $lastUsername,
             'error' => $error,
+            'recaptcha_site_key' => (string) $this->getParameter('recaptcha.site_key'),
         ]);
     }
 
