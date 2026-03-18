@@ -40,6 +40,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $created_at = null;
 
+    #[ORM\ManyToOne(targetEntity: self::class)]
+    #[ORM\JoinColumn(nullable: true)]
+    private ?self $createdBy = null;
+
     #[ORM\Column]
     private ?\DateTimeImmutable $updated_at = null;
 
@@ -168,6 +172,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setCreatedAt(?\DateTimeImmutable $created_at): static
     {
         $this->created_at = $created_at;
+
+        return $this;
+    }
+
+    public function getCreatedBy(): ?self
+    {
+        return $this->createdBy;
+    }
+
+    public function setCreatedBy(?self $createdBy): static
+    {
+        $this->createdBy = $createdBy;
 
         return $this;
     }
