@@ -1,0 +1,129 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Temoigner sur {{ produit.nom }}{% endblock %}
+
+{% block body %}
+{% include 'partials/headers.html.twig' %}
+
+<section class="relative overflow-hidden bg-gradient-to-b from-slate-50 via-white to-blue-50 py-14 sm:py-16">
+    <div class="pointer-events-none absolute inset-0">
+        <div class="absolute -left-20 top-16 h-64 w-64 rounded-full bg-blue-200/40 blur-3xl"></div>
+        <div class="absolute right-0 top-0 h-72 w-72 rounded-full bg-cyan-200/35 blur-3xl"></div>
+    </div>
+
+    <div class="relative mx-auto max-w-6xl px-6">
+        {% for label, messages in app.flashes %}
+            {% for message in messages %}
+                <div class="mb-4 rounded-2xl border px-4 py-3 text-sm font-medium {% if label == 'success' %}border-green-200 bg-green-50 text-green-800{% else %}border-red-200 bg-red-50 text-red-800{% endif %}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+
+        <div class="mb-7 max-w-4xl text-center mx-auto">
+            <p class="mx-auto inline-flex items-center rounded-full border border-slate-200 bg-white px-3 py-1 text-[11px] font-medium uppercase tracking-[0.12em] text-slate-500">Temoignage client</p>
+            <h1 class="mt-3 text-2xl font-bold leading-snug text-blue-900 sm:text-3xl">Laissez un avis video professionnel</h1>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600">Partagez votre experience en quelques minutes. Votre retour sera examine puis publie apres validation.</p>
+        </div>
+
+        <div class="grid grid-cols-1 gap-6 lg:grid-cols-12">
+            <aside class="lg:col-span-4">
+                <div class="rounded-3xl border border-blue-100 bg-white p-6 shadow-sm">
+                    <p class="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">Produit concerne</p>
+                    <h2 class="mt-3 text-2xl font-bold text-blue-900">{{ produit.nom }}</h2>
+                    {% if produit.marque %}
+                        <p class="mt-2 inline-flex items-center rounded-full bg-blue-100 px-3 py-1 text-xs font-semibold text-blue-700">{{ produit.marque }}</p>
+                    {% endif %}
+
+                    <div class="mt-6 space-y-3 text-sm text-slate-600">
+                        <div class="flex items-center gap-3 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5">
+                            <span class="h-2.5 w-2.5 rounded-full bg-blue-600"></span>
+                            Validation manuelle par notre equipe
+                        </div>
+                        <div class="flex items-center gap-3 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5">
+                            <span class="h-2.5 w-2.5 rounded-full bg-cyan-600"></span>
+                            Formats acceptes: MP4, MOV, WEBM
+                        </div>
+                        <div class="flex items-center gap-3 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5">
+                            <span class="h-2.5 w-2.5 rounded-full bg-indigo-600"></span>
+                            Duree ideale: 20 a 60 secondes
+                        </div>
+                    </div>
+
+                    <a href="{{ path('app_produit_show', {id: produit.id}) }}" class="mt-6 inline-flex w-full items-center justify-center rounded-xl border border-blue-200 px-4 py-2.5 text-sm font-semibold text-blue-700 transition hover:bg-blue-50">
+                        Retour au produit
+                    </a>
+                </div>
+            </aside>
+
+            <div class="lg:col-span-8">
+                {{ form_start(form, {attr: {class: 'rounded-3xl border border-blue-100 bg-white p-6 shadow-sm sm:p-8 space-y-6', enctype: 'multipart/form-data'}}) }}
+                    {% if form_errors(form) %}
+                        <div class="rounded-2xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+                            <p class="font-semibold">Erreurs detectees sur le formulaire :</p>
+                            <div class="mt-1">{{ form_errors(form) }}</div>
+                        </div>
+                    {% endif %}
+
+                    <div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
+                        <div>
+                            {{ form_label(form.nomClient, null, {label_attr: {class: 'mb-2 block text-sm font-semibold text-slate-800'}}) }}
+                            <p class="mb-2 text-xs text-slate-500">Information obligatoire</p>
+                            {{ form_widget(form.nomClient, {attr: {class: 'w-full rounded-xl border px-3.5 py-2.5 text-sm text-slate-800 focus:outline-none focus:ring-2 ' ~ (form.nomClient.vars.errors|length > 0 ? 'border-red-300 bg-red-50 focus:border-red-400 focus:ring-red-200' : 'border-slate-200 bg-white focus:border-blue-500 focus:ring-blue-100')}}) }}
+                            {% if form.nomClient.vars.errors|length > 0 %}
+                                <p class="mt-1.5 text-sm font-medium text-red-600">{{ form.nomClient.vars.errors[0].message }}</p>
+                            {% endif %}
+                        </div>
+                        <div>
+                            {{ form_label(form.fonctionClient, null, {label_attr: {class: 'mb-2 block text-sm font-semibold text-slate-800'}}) }}
+                            <p class="mb-2 text-xs text-slate-500">Optionnel</p>
+                            {{ form_widget(form.fonctionClient, {attr: {class: 'w-full rounded-xl border px-3.5 py-2.5 text-sm text-slate-800 focus:outline-none focus:ring-2 ' ~ (form.fonctionClient.vars.errors|length > 0 ? 'border-red-300 bg-red-50 focus:border-red-400 focus:ring-red-200' : 'border-slate-200 bg-white focus:border-blue-500 focus:ring-blue-100')}}) }}
+                            {% if form.fonctionClient.vars.errors|length > 0 %}
+                                <p class="mt-1.5 text-sm font-medium text-red-600">{{ form.fonctionClient.vars.errors[0].message }}</p>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div>
+                        {{ form_label(form.note, null, {label_attr: {class: 'mb-2 block text-sm font-semibold text-slate-800'}}) }}
+                        <p class="mb-2 text-xs text-slate-500">{{ form.note.vars.help }}</p>
+                        {{ form_widget(form.note, {attr: {class: 'w-full rounded-xl border px-3.5 py-2.5 text-sm text-slate-800 focus:outline-none focus:ring-2 ' ~ (form.note.vars.errors|length > 0 ? 'border-red-300 bg-red-50 focus:border-red-400 focus:ring-red-200' : 'border-slate-200 bg-white focus:border-blue-500 focus:ring-blue-100')}}) }}
+                        {% if form.note.vars.errors|length > 0 %}
+                            <p class="mt-1.5 text-sm font-medium text-red-600">{{ form.note.vars.errors[0].message }}</p>
+                        {% endif %}
+                    </div>
+
+                    <div>
+                        {{ form_label(form.contenu, null, {label_attr: {class: 'mb-2 block text-sm font-semibold text-slate-800'}}) }}
+                        <p class="mb-2 text-xs text-slate-500">Optionnel</p>
+                        {{ form_widget(form.contenu, {attr: {class: 'w-full rounded-xl border px-3.5 py-2.5 text-sm text-slate-800 placeholder:text-slate-400 focus:outline-none focus:ring-2 ' ~ (form.contenu.vars.errors|length > 0 ? 'border-red-300 bg-red-50 focus:border-red-400 focus:ring-red-200' : 'border-slate-200 bg-white focus:border-blue-500 focus:ring-blue-100'), rows: 5}}) }}
+                        {% if form.contenu.vars.errors|length > 0 %}
+                            <p class="mt-1.5 text-sm font-medium text-red-600">{{ form.contenu.vars.errors[0].message }}</p>
+                        {% endif %}
+                    </div>
+
+                    <div>
+                        {{ form_label(form.videoFile, null, {label_attr: {class: 'mb-2 block text-sm font-semibold text-slate-800'}}) }}
+                        <p class="mb-2 text-xs text-slate-500">Obligatoire. {{ form.videoFile.vars.help }}</p>
+                        {{ form_widget(form.videoFile, {attr: {class: 'w-full rounded-xl border px-3.5 py-2.5 text-sm text-slate-700 file:mr-3 file:rounded-lg file:border-0 file:px-3.5 file:py-2 file:font-semibold ' ~ (form.videoFile.vars.errors|length > 0 ? 'border-red-300 bg-red-50 file:bg-red-100 file:text-red-700' : 'border-slate-200 bg-white file:bg-blue-100 file:text-blue-700')}}) }}
+                        {% if form.videoFile.vars.errors|length > 0 %}
+                            <p class="mt-1.5 text-sm font-medium text-red-600">{{ form.videoFile.vars.errors[0].message }}</p>
+                        {% endif %}
+                    </div>
+
+                    <div class="flex flex-col gap-3 border-t border-slate-100 pt-4 sm:flex-row">
+                        <button type="submit" class="inline-flex flex-1 items-center justify-center rounded-xl bg-blue-700 px-5 py-3 text-sm font-bold text-white transition hover:bg-blue-800">
+                            Envoyer mon temoignage
+                        </button>
+                        <a href="{{ path('app_produit_show', {id: produit.id}) }}" class="inline-flex flex-1 items-center justify-center rounded-xl border border-slate-200 px-5 py-3 text-center text-sm font-semibold text-slate-700 transition hover:bg-slate-50">
+                            Annuler
+                        </a>
+                    </div>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+</section>
+
+{% include 'partials/footer.html.twig' ignore missing %}
+{% endblock %}

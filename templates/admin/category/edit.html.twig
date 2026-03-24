@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier {{ category.nom }}{% endblock %}
+
+{% block body %}
+<div class="min-h-screen bg-gradient-to-b from-blue-50 via-white to-blue-50">
+    <div class="mx-auto max-w-5xl px-5 py-8 lg:py-10">
+        <nav class="mb-6 flex items-center gap-2 text-sm text-slate-500">
+            <a href="{{ path('app_admin_category_index') }}" class="font-medium text-blue-700 hover:underline">Categories</a>
+            <span>/</span>
+            <span>Modifier</span>
+        </nav>
+
+        <div class="mb-6">
+            <h1 class="text-3xl font-bold tracking-tight text-blue-900">Modifier la categorie</h1>
+            <p class="mt-1 text-sm text-slate-500">{{ category.nom }}</p>
+        </div>
+
+        {{ include('admin/category/_form.html.twig', {
+            form: form,
+            btn_label: 'Enregistrer',
+            btn_color: 'bg-amber-600 hover:bg-amber-700'
+        }) }}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,53 @@
+<aside class="hidden lg:fixed lg:inset-y-0 lg:left-0 lg:block lg:w-72 lg:bg-gradient-to-b lg:from-blue-950 lg:via-blue-900 lg:to-blue-800 lg:p-5 lg:text-blue-50 lg:shadow-2xl">
+    <div class="flex h-full min-h-0 flex-col">
+        <div class="mb-5 border-b border-blue-300/25 pb-4">
+            <p class="text-[11px] font-semibold uppercase tracking-[0.24em] text-blue-200/90">Espace Admin</p>
+            <h1 class="mt-2 text-[26px] font-extrabold leading-tight text-white">Galerie MPD</h1>
+            <p class="mt-1.5 text-[12px] font-medium leading-relaxed text-blue-100/85">Gestion centralisee des modules</p>
+        </div>
+
+        {% set current = admin_sidebar_active|default('') %}
+        {% set tabs = [
+            { key: 'dashboard', label: 'Tableau de bord', href: path('app_admin_dashboard'), section: 'Principal' },
+            { key: 'utilisateurs', label: 'Utilisateurs', href: '/admin/users', section: 'Principal' },
+
+            { key: 'produits', label: 'Produits', href: path('app_admin_produit_index'), section: 'Catalogue' },
+            { key: 'categories', label: 'Categories', href: path('app_admin_category_index'), section: 'Catalogue' },
+            { key: 'sous-categories', label: 'Sous-categories', href: path('app_admin_sous_categorie_index'), section: 'Catalogue' },
+            { key: 'services', label: 'Services', href: '/admin/services', section: 'Catalogue' },
+
+            { key: 'temoignages', label: 'Temoignages', href: path('app_admin_temoignage_index'), section: 'Activite client' },
+            { key: 'commandes', label: 'Commandes', href: '/admin/commandes', section: 'Activite client' },
+            { key: 'promotions', label: 'Promotions', href: '/admin/promotions', section: 'Activite client' }
+        ] %}
+
+        <div class="flex-1 min-h-0 overflow-y-auto pr-1">
+            <nav class="space-y-2.5">
+                {% for sectionName in ['Principal', 'Catalogue', 'Activite client'] %}
+                    <div class="rounded-xl border border-white/10 bg-white/5 p-2 backdrop-blur-[1px]">
+                        <p class="mb-1.5 px-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-blue-200/80">{{ sectionName }}</p>
+                        <div class="space-y-1">
+                            {% for tab in tabs|filter(t => t.section == sectionName) %}
+                                <a href="{{ tab.href }}"
+                                   class="{{ current == tab.key
+                                        ? 'flex items-center justify-between rounded-lg bg-gradient-to-r from-blue-500/40 to-cyan-400/25 px-3 py-2 text-sm font-semibold text-white ring-1 ring-blue-200/60 shadow-sm'
+                                        : 'flex items-center justify-between rounded-lg px-3 py-2 text-sm font-medium text-blue-100/90 transition hover:bg-white/10 hover:text-white' }}">
+                                    <span>{{ tab.label }}</span>
+                                    {% if current == tab.key %}
+                                        <span class="h-2 w-2 rounded-full bg-cyan-200"></span>
+                                    {% endif %}
+                                </a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endfor %}
+            </nav>
+        </div>
+
+        <div class="mt-4 border-t border-white/10 pt-4">
+            <a href="{{ path('_logout_main') }}" class="flex items-center justify-center rounded-lg border border-red-300/40 bg-red-500/10 px-4 py-2 text-sm font-semibold text-red-100 transition hover:bg-red-500/20 hover:text-white">
+                Deconnexion
+            </a>
+        </div>
+    </div>
+</aside>

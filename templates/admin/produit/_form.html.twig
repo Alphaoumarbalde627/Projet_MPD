@@ -1,0 +1,239 @@
+{{ form_start(form, {attr: {class: 'space-y-0', enctype: 'multipart/form-data', id: 'produit-form'}}) }}
+
+<div class="grid grid-cols-1 gap-6 xl:grid-cols-3">
+
+    {# ── Colonne principale (2/3) ── #}
+    <div class="space-y-6 xl:col-span-2">
+
+        {# Section : Informations générales #}
+        <div class="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+            <div class="flex items-center gap-3 border-b border-slate-100 bg-gradient-to-r from-blue-50 to-white px-6 py-4">
+                <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-600 text-white">
+                    <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                    </svg>
+                </span>
+                <div>
+                    <h3 class="text-sm font-bold text-slate-800">Informations générales</h3>
+                    <p class="text-xs text-slate-400">Nom, référence, marque et description</p>
+                </div>
+            </div>
+            <div class="space-y-5 p-6">
+                <div>
+                    {{ form_label(form.nom, null, {label_attr: {class: 'block mb-1.5 text-xs font-semibold uppercase tracking-wide text-slate-500'}}) }}
+                    {{ form_widget(form.nom, {attr: {class: 'w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-medium text-slate-800 transition placeholder:text-slate-400 focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/20'}}) }}
+                    {{ form_errors(form.nom) }}
+                </div>
+                <div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
+                    <div>
+                        {{ form_label(form.reference, null, {label_attr: {class: 'block mb-1.5 text-xs font-semibold uppercase tracking-wide text-slate-500'}}) }}
+                        {{ form_widget(form.reference, {attr: {class: 'w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-medium text-slate-800 transition placeholder:text-slate-400 focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/20'}}) }}
+                        {{ form_errors(form.reference) }}
+                    </div>
+                    <div>
+                        {{ form_label(form.marque, null, {label_attr: {class: 'block mb-1.5 text-xs font-semibold uppercase tracking-wide text-slate-500'}}) }}
+                        {{ form_widget(form.marque, {attr: {class: 'w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-medium text-slate-800 transition placeholder:text-slate-400 focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/20'}}) }}
+                        {{ form_errors(form.marque) }}
+                    </div>
+                </div>
+                <div>
+                    {{ form_label(form.description, null, {label_attr: {class: 'block mb-1.5 text-xs font-semibold uppercase tracking-wide text-slate-500'}}) }}
+                    {{ form_widget(form.description, {attr: {class: 'w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-medium text-slate-800 transition placeholder:text-slate-400 focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/20', rows: '4'}}) }}
+                    {{ form_errors(form.description) }}
+                </div>
+            </div>
+        </div>
+
+        {# Section : Prix & Stock #}
+        <div class="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+            <div class="flex items-center gap-3 border-b border-slate-100 bg-gradient-to-r from-emerald-50 to-white px-6 py-4">
+                <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-600 text-white">
+                    <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                </span>
+                <div>
+                    <h3 class="text-sm font-bold text-slate-800">Prix & Stock</h3>
+                    <p class="text-xs text-slate-400">Tarification et gestion des quantités</p>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 gap-5 p-6 sm:grid-cols-2">
+                <div>
+                    {{ form_label(form.prix, null, {label_attr: {class: 'block mb-1.5 text-xs font-semibold uppercase tracking-wide text-slate-500'}}) }}
+                    <div class="relative">
+                        <span class="absolute inset-y-0 right-0 flex items-center pr-4 text-xs font-semibold text-slate-400">GNF</span>
+                        {{ form_widget(form.prix, {attr: {class: 'w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 pr-14 text-sm font-medium text-slate-800 transition placeholder:text-slate-400 focus:border-emerald-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500/20'}}) }}
+                    </div>
+                    {{ form_errors(form.prix) }}
+                </div>
+                <div>
+                    {{ form_label(form.quantite_stock, null, {label_attr: {class: 'block mb-1.5 text-xs font-semibold uppercase tracking-wide text-slate-500'}}) }}
+                    <div class="relative">
+                        <span class="absolute inset-y-0 right-0 flex items-center pr-4 text-xs font-semibold text-slate-400">unités</span>
+                        {{ form_widget(form.quantite_stock, {attr: {class: 'w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 pr-16 text-sm font-medium text-slate-800 transition placeholder:text-slate-400 focus:border-emerald-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500/20'}}) }}
+                    </div>
+                    {{ form_errors(form.quantite_stock) }}
+                </div>
+            </div>
+        </div>
+
+        {# Section : Classification #}
+        <div class="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+            <div class="flex items-center gap-3 border-b border-slate-100 bg-gradient-to-r from-violet-50 to-white px-6 py-4">
+                <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-violet-600 text-white">
+                    <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"/>
+                    </svg>
+                </span>
+                <div>
+                    <h3 class="text-sm font-bold text-slate-800">Classification</h3>
+                    <p class="text-xs text-slate-400">Rattachement à une sous-catégorie</p>
+                </div>
+            </div>
+            <div class="p-6">
+                {{ form_label(form.sousCategorie, null, {label_attr: {class: 'block mb-1.5 text-xs font-semibold uppercase tracking-wide text-slate-500'}}) }}
+                {{ form_widget(form.sousCategorie, {attr: {class: 'w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-medium text-slate-800 transition focus:border-violet-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-violet-500/20'}}) }}
+                {{ form_errors(form.sousCategorie) }}
+            </div>
+        </div>
+
+    </div>
+
+    {# ── Colonne latérale (1/3) ── #}
+    <div class="space-y-6">
+
+        {# Section : Image #}
+        <div class="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+            <div class="flex items-center gap-3 border-b border-slate-100 bg-gradient-to-r from-amber-50 to-white px-6 py-4">
+                <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-amber-500 text-white">
+                    <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                    </svg>
+                </span>
+                <div>
+                    <h3 class="text-sm font-bold text-slate-800">Image du produit</h3>
+                    <p class="text-xs text-slate-400">Photo principale</p>
+                </div>
+            </div>
+            <div class="p-6">
+                {# Aperçu image : image existante OU placeholder, remplacé dynamiquement par JS #}
+                <div id="image-preview-wrapper" class="mb-4">
+                    {% if current_image is defined and current_image %}
+                        <div id="image-preview-existing" class="overflow-hidden rounded-xl border border-slate-200">
+                            <img src="{{ asset(current_image) }}" alt="Image actuelle" class="h-40 w-full object-cover">
+                            <p class="border-t border-slate-100 bg-slate-50 px-3 py-2 text-center text-xs text-slate-500">Image actuelle</p>
+                        </div>
+                    {% else %}
+                        <div id="image-preview-placeholder" class="flex h-40 items-center justify-center rounded-xl border-2 border-dashed border-slate-200 bg-slate-50">
+                            <div class="text-center">
+                                <svg class="mx-auto h-10 w-10 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                                </svg>
+                                <p class="mt-2 text-xs text-slate-400">Aucune image</p>
+                            </div>
+                        </div>
+                    {% endif %}
+                    {# Aperçu JS injecté après sélection du fichier #}
+                    <div id="image-preview-new" class="hidden overflow-hidden rounded-xl border border-blue-200">
+                        <img id="image-preview-img" src="" alt="Aperçu" class="h-40 w-full object-cover">
+                        <p class="border-t border-blue-100 bg-blue-50 px-3 py-2 text-center text-xs text-blue-600">Nouvelle image sélectionnée</p>
+                    </div>
+                </div>
+
+                <label class="block">
+                    <span class="block mb-1.5 text-xs font-semibold uppercase tracking-wide text-slate-500">
+                        {{ form_label(form.imageFile) }}
+                    </span>
+                    <div class="relative cursor-pointer rounded-xl border-2 border-dashed border-blue-200 bg-blue-50/50 px-4 py-5 text-center transition hover:border-blue-400 hover:bg-blue-50">
+                        <svg class="mx-auto mb-2 h-7 w-7 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
+                        </svg>
+                        <p id="upload-label-text" class="text-sm font-medium text-blue-600">Cliquer pour choisir</p>
+                        <p class="mt-1 text-xs text-slate-400">JPG, PNG, WEBP — max 5 Mo</p>
+                        {{ form_widget(form.imageFile, {attr: {class: 'absolute inset-0 h-full w-full cursor-pointer opacity-0', id: 'produit_imageFile'}}) }}
+                    </div>
+                </label>
+                {{ form_errors(form.imageFile) }}
+            </div>
+
+            <script>
+                (function () {
+                    const input = document.getElementById('produit_imageFile');
+                    if (!input) return;
+
+                    input.addEventListener('change', function () {
+                        const file = this.files[0];
+                        if (!file) return;
+
+                        const reader = new FileReader();
+                        reader.onload = function (e) {
+                            // Masquer le placeholder ou l'image existante
+                            const placeholder = document.getElementById('image-preview-placeholder');
+                            const existing   = document.getElementById('image-preview-existing');
+                            if (placeholder) placeholder.classList.add('hidden');
+                            if (existing)    existing.classList.add('hidden');
+
+                            // Afficher l'aperçu de la nouvelle image
+                            const previewBox = document.getElementById('image-preview-new');
+                            const previewImg = document.getElementById('image-preview-img');
+                            previewImg.src = e.target.result;
+                            previewBox.classList.remove('hidden');
+
+                            // Mettre à jour le libellé
+                            const label = document.getElementById('upload-label-text');
+                            if (label) label.textContent = file.name;
+                        };
+                        reader.readAsDataURL(file);
+                    });
+                })();
+            </script>
+        </div>
+
+        {# Section : Visibilité #}
+        <div class="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+            <div class="flex items-center gap-3 border-b border-slate-100 bg-gradient-to-r from-slate-50 to-white px-6 py-4">
+                <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-slate-700 text-white">
+                    <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                    </svg>
+                </span>
+                <div>
+                    <h3 class="text-sm font-bold text-slate-800">Visibilité</h3>
+                    <p class="text-xs text-slate-400">Statut de publication</p>
+                </div>
+            </div>
+            <div class="p-6">
+                <label class="flex cursor-pointer items-start gap-4 rounded-xl border border-slate-200 p-4 transition hover:border-blue-300 hover:bg-blue-50/40">
+                    {{ form_widget(form.estActif, {attr: {class: 'mt-0.5 h-5 w-5 shrink-0 rounded border-slate-300 text-blue-600 focus:ring-blue-500'}}) }}
+                    <div>
+                        <span class="block text-sm font-semibold text-slate-800">Produit actif</span>
+                        <span class="block text-xs text-slate-500 mt-0.5">Le produit sera visible sur la boutique</span>
+                    </div>
+                </label>
+                {{ form_errors(form.estActif) }}
+            </div>
+        </div>
+
+        {# Boutons d'action #}
+        <div class="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+            <div class="space-y-3 p-5">
+                <button type="submit" class="flex w-full items-center justify-center gap-2 rounded-xl {{ btn_color }} px-5 py-3 text-sm font-bold text-white shadow-sm transition active:scale-95">
+                    <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/>
+                    </svg>
+                    {{ btn_label }}
+                </button>
+                <a href="{{ path('app_admin_produit_index') }}" class="flex w-full items-center justify-center gap-2 rounded-xl border border-slate-200 px-5 py-3 text-sm font-semibold text-slate-600 transition hover:bg-slate-50 active:scale-95">
+                    <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                    Annuler
+                </a>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{{ form_end(form) }}

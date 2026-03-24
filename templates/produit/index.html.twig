@@ -1,0 +1,172 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nos Produits — Galerie MPD{% endblock %}
+
+{% block body %}
+{% include 'partials/headers.html.twig' %}
+
+<section class="bg-gradient-to-b from-blue-50 to-white py-12">
+    <div class="container mx-auto px-6">
+        <div class="mb-10 text-center">
+            <h1 class="text-4xl font-extrabold text-blue-900 mb-3">Notre Catalogue</h1>
+            <p class="text-lg text-gray-600">Découvrez notre sélection de produits de qualité</p>
+            {% if search_term is defined and search_term is not empty %}
+                <p class="mt-3 inline-flex items-center rounded-full bg-blue-100 px-4 py-1 text-sm font-medium text-blue-700">
+                    Résultats pour : "{{ search_term }}"
+                </p>
+            {% endif %}
+        </div>
+
+        {% if produits is empty %}
+            <div class="flex flex-col items-center justify-center py-24 text-center">
+                <svg class="h-16 w-16 text-blue-200 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                          d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
+                </svg>
+                <p class="text-xl font-semibold text-slate-500">Aucun produit disponible pour le moment.</p>
+                <p class="mt-2 text-sm text-slate-400">Revenez bientôt, notre catalogue s'enrichit régulièrement !</p>
+            </div>
+        {% else %}
+            <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                {% for produit in produits %}
+                    <article class="group flex flex-col overflow-hidden rounded-2xl border border-blue-100 bg-white shadow-sm transition hover:shadow-lg">
+                        {# Image #}
+                        <div class="relative h-52 overflow-hidden bg-gradient-to-br from-blue-50 to-white">
+                            {% if produit.image %}
+                                <img src="{{ asset(produit.image) }}" alt="{{ produit.nom }}"
+                                     class="h-full w-full object-cover transition duration-300 group-hover:scale-105">
+                            {% else %}
+                                <div class="flex h-full w-full items-center justify-center">
+                                    <svg class="h-16 w-16 text-blue-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                              d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                                    </svg>
+                                </div>
+                            {% endif %}
+                            {# Badge stock #}
+                            {% if produit.quantiteStock == 0 %}
+                                <span class="absolute left-3 top-3 rounded-full bg-red-600 px-2.5 py-0.5 text-xs font-bold text-white">Rupture</span>
+                            {% elseif produit.quantiteStock <= 5 %}
+                                <span class="absolute left-3 top-3 rounded-full bg-orange-500 px-2.5 py-0.5 text-xs font-bold text-white">Stock limité</span>
+                            {% endif %}
+                        </div>
+
+                        {# Contenu #}
+                        <div class="flex flex-1 flex-col p-4">
+                            <div class="mb-3 flex-1">
+                                {% if produit.sousCategorie and produit.sousCategorie.category %}
+                                    <span class="inline-block rounded-full bg-blue-100 px-2 py-0.5 text-xs font-medium text-blue-700 mb-2">
+                                        {{ produit.sousCategorie.category.nom }}
+                                    </span>
+                                {% endif %}
+                                <h2 class="font-semibold text-slate-800 leading-snug line-clamp-2">{{ produit.nom }}</h2>
+                                {% if produit.marque %}
+                                    <p class="mt-1 text-xs text-slate-400">{{ produit.marque }}</p>
+                                {% endif %}
+                            </div>
+
+                            <div class="mb-4">
+                                <p class="text-xl font-extrabold text-blue-700">
+                                    {{ produit.prix|number_format(0, ',', ' ') }}
+                                    <span class="text-sm font-semibold text-slate-500">GNF</span>
+                                </p>
+                            </div>
+
+                            {# Boutons #}
+                            <div class="space-y-2">
+                                <div class="flex gap-2">
+                                    <a href="{{ path('app_produit_show', {id: produit.id}) }}"
+                                       class="flex-1 inline-flex items-center justify-center gap-1 rounded-lg border border-blue-200 px-2 py-1.5 text-xs font-semibold text-blue-700 transition hover:bg-blue-50">
+                                        <svg class="w-3 h-3 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                                        </svg>
+                                        Voir plus
+                                    </a>
+                                    <a href="{{ path('app_temoignage_new', {id: produit.id}) }}"
+                                       class="flex-1 inline-flex items-center justify-center gap-1 rounded-lg border border-indigo-200 bg-indigo-50 px-2 py-1.5 text-xs font-semibold text-indigo-700 transition hover:bg-indigo-100">
+                                        <svg class="w-3 h-3 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
+                                        </svg>
+                                        Témoigner
+                                    </a>
+                                </div>
+                                {% if produit.quantiteStock > 0 %}
+                                    <a href="{{ path('app_cart_add', {id: produit.id}) }}"
+                                       class="flex w-full items-center justify-center gap-1.5 rounded-lg bg-gradient-to-r from-blue-600 to-blue-700 px-3 py-2 text-xs font-semibold text-white shadow-sm transition hover:from-blue-700 hover:to-blue-800 hover:shadow-md">
+                                        <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
+                                        </svg>
+                                        Ajouter au panier
+                                    </a>
+                                {% else %}
+                                    <button disabled
+                                            class="flex w-full cursor-not-allowed items-center justify-center gap-1.5 rounded-lg bg-slate-100 px-3 py-2 text-xs font-semibold text-slate-400">
+                                        <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"/>
+                                        </svg>
+                                        Indisponible
+                                    </button>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </article>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        {# Pagination #}
+        {% if total_pages is defined and total_pages > 1 %}
+            <div class="mt-10 flex flex-col items-center gap-4">
+                <p class="text-sm text-slate-500">Page {{ current_page }} sur {{ total_pages }}</p>
+                <div class="flex flex-wrap items-center justify-center gap-2">
+                    {% if current_page > 1 %}
+                        <a href="{{ path('app_produit_index', app.request.query.all|merge({page: current_page - 1})) }}"
+                           class="inline-flex items-center gap-1 rounded-lg border border-blue-200 bg-white px-4 py-2 text-sm font-semibold text-blue-700 shadow-sm transition hover:bg-blue-50">
+                            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                            </svg>
+                            Précédent
+                        </a>
+                    {% else %}
+                        <span class="inline-flex cursor-not-allowed items-center gap-1 rounded-lg border border-slate-100 bg-slate-50 px-4 py-2 text-sm font-semibold text-slate-300">
+                            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                            </svg>
+                            Précédent
+                        </span>
+                    {% endif %}
+
+                    {% for pageNumber in 1..total_pages %}
+                        {% if pageNumber == current_page %}
+                            <span class="inline-flex h-10 w-10 items-center justify-center rounded-full bg-blue-700 text-sm font-bold text-white shadow-sm">{{ pageNumber }}</span>
+                        {% else %}
+                            <a href="{{ path('app_produit_index', app.request.query.all|merge({page: pageNumber})) }}"
+                               class="inline-flex h-10 w-10 items-center justify-center rounded-full border border-blue-200 bg-white text-sm font-semibold text-blue-700 transition hover:bg-blue-50">{{ pageNumber }}</a>
+                        {% endif %}
+                    {% endfor %}
+
+                    {% if current_page < total_pages %}
+                        <a href="{{ path('app_produit_index', app.request.query.all|merge({page: current_page + 1})) }}"
+                           class="inline-flex items-center gap-1 rounded-lg border border-blue-200 bg-white px-4 py-2 text-sm font-semibold text-blue-700 shadow-sm transition hover:bg-blue-50">
+                            Suivant
+                            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                            </svg>
+                        </a>
+                    {% else %}
+                        <span class="inline-flex cursor-not-allowed items-center gap-1 rounded-lg border border-slate-100 bg-slate-50 px-4 py-2 text-sm font-semibold text-slate-300">
+                            Suivant
+                            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                            </svg>
+                        </span>
+                    {% endif %}
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</section>
+
+{% include 'partials/footer.html.twig' ignore missing %}
+{% endblock %}
