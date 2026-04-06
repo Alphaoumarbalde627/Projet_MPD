@@ -1,0 +1,84 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Validation de la commande{% endblock %}
+
+{% block body %}
+{% include 'partials/headers.html.twig' %}
+
+<div class="min-h-screen bg-gray-50 pt-16">
+    <div class="max-w-4xl mx-auto px-4 py-8">
+        <h1 class="text-3xl font-bold text-gray-900 mb-8">Validation de la commande</h1>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <!-- Détails de la commande -->
+            <div class="bg-white rounded-lg shadow-sm border p-6">
+                <h2 class="text-lg font-semibold text-gray-900 mb-4">Détails de la commande</h2>
+                <div class="space-y-4">
+                    {% for item in cart_items %}
+                        <div class="flex items-center space-x-4 py-4 border-b border-gray-200 last:border-b-0">
+                            <div class="flex-shrink-0 w-12 h-12 bg-gray-200 rounded-md overflow-hidden">
+                                {% if item.produit.image %}
+                                    <img src="{{ asset(item.produit.image) }}" alt="{{ item.produit.nom }}" class="w-full h-full object-cover">
+                                {% else %}
+                                    <div class="w-full h-full flex items-center justify-center text-gray-400">
+                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                                        </svg>
+                                    </div>
+                                {% endif %}
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-sm font-medium text-gray-900">{{ item.produit.nom }}</h3>
+                                <p class="text-sm text-gray-500">Quantité: {{ item.quantite }}</p>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-sm font-medium text-gray-900">{{ item.sous_total|number_format(0, ',', ' ') }} GNF</p>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- Résumé et confirmation -->
+            <div class="bg-white rounded-lg shadow-sm border p-6">
+                <h2 class="text-lg font-semibold text-gray-900 mb-4">Résumé</h2>
+                <div class="space-y-2 mb-6">
+                    <div class="flex justify-between text-sm">
+                        <span>Sous-total</span>
+                        <span>{{ total|number_format(0, ',', ' ') }} GNF</span>
+                    </div>
+                    <div class="flex justify-between text-sm">
+                        <span>Livraison</span>
+                        <span>À définir</span>
+                    </div>
+                    <div class="border-t pt-2">
+                        <div class="flex justify-between text-lg font-semibold">
+                            <span>Total</span>
+                            <span>{{ total|number_format(0, ',', ' ') }} GNF</span>
+                        </div>
+                    </div>
+                </div>
+
+                <form method="post" onsubmit="return confirm('Confirmer la validation de cette commande ?')">
+                    <button type="submit" class="w-full bg-green-600 text-white py-3 px-4 rounded-md font-medium hover:bg-green-700 flex items-center justify-center">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                        Confirmer la commande
+                    </button>
+                </form>
+
+                <div class="mt-4 text-sm text-gray-600">
+                    <p>En validant cette commande, un administrateur sera automatiquement notifié et vous contactera pour finaliser la livraison.</p>
+                </div>
+
+                <div class="mt-4">
+                    <a href="{{ path('app_cart_index') }}" class="text-blue-600 hover:text-blue-800 text-sm">← Retour au panier</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% include 'partials/footer.html.twig' ignore missing %}
+{% endblock %}

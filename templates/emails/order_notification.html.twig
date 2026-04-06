@@ -1,0 +1,84 @@
+{% block subject %}Nouvelle commande reçue - Galerie MPD{% endblock %}
+
+{% block body_text %}
+Bonjour,
+
+Une nouvelle commande a été passée sur la Galerie MPD.
+
+Client: {{ client.prenom }} {{ client.nom }}
+Email: {{ client.email }}
+Téléphone: {{ client.tel }}
+
+Détails de la commande:
+{% for ligne in commande.ligneCommandes %}
+- {{ ligne.produit.nom }} (Quantité: {{ ligne.quantite }}, Prix: {{ ligne.prix }} GNF)
+{% endfor %}
+
+Montant total: {{ commande.montantTotal }} GNF
+
+Statut: {{ commande.statut.value }}
+
+Veuillez vous connecter à votre espace administrateur pour valider cette commande.
+
+Cordialement,
+L'équipe Galerie MPD
+{% endblock %}
+
+{% block body_html %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Nouvelle commande reçue</title>
+</head>
+<body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
+    <h1>Nouvelle commande reçue - Galerie MPD</h1>
+
+    <p>Bonjour,</p>
+
+    <p>Une nouvelle commande a été passée sur la Galerie MPD.</p>
+
+    <h2>Informations client</h2>
+    <ul>
+        <li><strong>Nom:</strong> {{ client.prenom }} {{ client.nom }}</li>
+        <li><strong>Email:</strong> {{ client.email }}</li>
+        <li><strong>Téléphone:</strong> {{ client.tel }}</li>
+    </ul>
+
+    <h2>Détails de la commande</h2>
+    <table style="border-collapse: collapse; width: 100%;">
+        <thead>
+            <tr style="background-color: #f2f2f2;">
+                <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Produit</th>
+                <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">Quantité</th>
+                <th style="border: 1px solid #ddd; padding: 8px; text-align: right;">Prix unitaire</th>
+                <th style="border: 1px solid #ddd; padding: 8px; text-align: right;">Sous-total</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for ligne in commande.ligneCommandes %}
+            <tr>
+                <td style="border: 1px solid #ddd; padding: 8px;">{{ ligne.produit.nom }}</td>
+                <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">{{ ligne.quantite }}</td>
+                <td style="border: 1px solid #ddd; padding: 8px; text-align: right;">{{ ligne.prix }} GNF</td>
+                <td style="border: 1px solid #ddd; padding: 8px; text-align: right;">{{ (ligne.prix * ligne.quantite)|number_format(0, ',', ' ') }} GNF</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        <tfoot>
+            <tr style="background-color: #f2f2f2;">
+                <td colspan="3" style="border: 1px solid #ddd; padding: 8px; text-align: right; font-weight: bold;">Total</td>
+                <td style="border: 1px solid #ddd; padding: 8px; text-align: right; font-weight: bold;">{{ commande.montantTotal }} GNF</td>
+            </tr>
+        </tfoot>
+    </table>
+
+    <p><strong>Statut:</strong> {{ commande.statut.value }}</p>
+
+    <p>Veuillez vous connecter à votre espace administrateur pour valider cette commande.</p>
+
+    <p>Cordialement,<br>
+    L'équipe Galerie MPD</p>
+</body>
+</html>
+{% endblock %}
