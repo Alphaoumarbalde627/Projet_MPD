@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouvelle Categorie{% endblock %}
+
+{% block body %}
+<div class="min-h-screen bg-gradient-to-b from-blue-50 via-white to-blue-50">
+    <div class="mx-auto max-w-5xl px-5 py-8 lg:py-10">
+        <nav class="mb-6 flex items-center gap-2 text-sm text-slate-500">
+            <a href="{{ path('app_admin_category_index') }}" class="font-medium text-blue-700 hover:underline">Categories</a>
+            <span>/</span>
+            <span>Nouveau</span>
+        </nav>
+
+        <div class="mb-6">
+            <h1 class="text-3xl font-bold tracking-tight text-blue-900">Ajouter une categorie</h1>
+            <p class="mt-1 text-sm text-slate-500">Renseigne le nom et la description de la categorie.</p>
+        </div>
+
+        {{ include('admin/category/_form.html.twig', {
+            form: form,
+            btn_label: 'Creer',
+            btn_color: 'bg-blue-700 hover:bg-blue-800'
+        }) }}
+    </div>
+</div>
+{% endblock %}

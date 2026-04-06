@@ -41,6 +41,13 @@ class Produit
     #[ORM\Column]
     private ?\DateTimeImmutable $updated_at = null;
 
+    #[ORM\ManyToOne(targetEntity: SousCategorie::class)]
+    #[ORM\JoinColumn(nullable: true)]
+    private ?SousCategorie $sousCategorie = null;
+
+    #[ORM\Column]
+    private bool $estActif = true;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -157,6 +164,30 @@ class Produit
     public function setUpdatedAt(\DateTimeImmutable $updated_at): static
     {
         $this->updated_at = $updated_at;
+
+        return $this;
+    }
+
+    public function getSousCategorie(): ?SousCategorie
+    {
+        return $this->sousCategorie;
+    }
+
+    public function setSousCategorie(?SousCategorie $sousCategorie): static
+    {
+        $this->sousCategorie = $sousCategorie;
+
+        return $this;
+    }
+
+    public function isEstActif(): bool
+    {
+        return $this->estActif;
+    }
+
+    public function setEstActif(bool $estActif): static
+    {
+        $this->estActif = $estActif;
 
         return $this;
     }

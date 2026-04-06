@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Detail categorie{% endblock %}
+
+{% block body %}
+<div class="min-h-screen bg-gradient-to-b from-blue-50 via-white to-blue-50">
+    <div class="mx-auto max-w-5xl px-5 py-8 lg:py-10">
+        <nav class="mb-6 flex items-center gap-2 text-sm text-slate-500">
+            <a href="{{ path('app_admin_category_index') }}" class="font-medium text-blue-700 hover:underline">Categories</a>
+            <span>/</span>
+            <span>{{ category.nom }}</span>
+        </nav>
+
+        <div class="rounded-xl border border-blue-100 bg-white p-6 shadow-sm">
+            <h1 class="text-2xl font-bold text-slate-800">{{ category.nom }}</h1>
+            <dl class="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2">
+                <div>
+                    <dt class="text-xs font-medium text-slate-400">Description</dt>
+                    <dd class="mt-1 text-sm font-semibold text-slate-700">{{ category.description ? category.description : '—' }}</dd>
+                </div>
+                <div>
+                    <dt class="text-xs font-medium text-slate-400">Cree le</dt>
+                    <dd class="mt-1 text-sm font-semibold text-slate-700">{{ category.createdAt ? category.createdAt|date('d/m/Y H:i') : '—' }}</dd>
+                </div>
+                <div>
+                    <dt class="text-xs font-medium text-slate-400">Mis a jour le</dt>
+                    <dd class="mt-1 text-sm font-semibold text-slate-700">{{ category.updatedAt ? category.updatedAt|date('d/m/Y H:i') : '—' }}</dd>
+                </div>
+            </dl>
+
+            <div class="mt-6 flex items-center gap-3">
+                <a href="{{ path('app_admin_category_edit', {id: category.id}) }}" class="inline-flex items-center gap-2 rounded-lg bg-amber-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-amber-700">
+                    Modifier
+                </a>
+                <a href="{{ path('app_admin_category_index') }}" class="inline-flex items-center gap-2 rounded-lg border border-slate-200 px-5 py-2.5 text-sm font-semibold text-slate-700 transition hover:bg-slate-50">
+                    Retour
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

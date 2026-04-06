@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouveau produit{% endblock %}
+
+{% block body %}
+<div class="min-h-screen bg-gradient-to-b from-blue-50 via-white to-blue-50">
+    {% include 'admin/partials/sidebar.html.twig' with { admin_sidebar_active: 'produits' } %}
+
+    <div class="mx-auto max-w-7xl px-5 py-8 lg:pl-80 lg:pr-8 lg:py-10">
+        <main>
+            {# Fil d'Ariane #}
+            <nav class="mb-6 flex items-center gap-2 text-sm text-slate-500">
+                <a href="{{ path('app_admin_produit_index') }}" class="font-medium text-blue-700 hover:underline">Produits</a>
+                <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                </svg>
+                <span>Nouveau produit</span>
+            </nav>
+
+            <div class="mb-6">
+                <h2 class="text-3xl font-bold tracking-tight text-blue-900">Ajouter un produit</h2>
+                <p class="mt-1 text-sm text-slate-500">Remplissez le formulaire ci-dessous pour créer un nouveau produit.</p>
+            </div>
+
+            {{ include('admin/produit/_form.html.twig', {
+                form: form,
+                btn_label: 'Créer le produit',
+                btn_color: 'bg-blue-700 hover:bg-blue-800',
+                current_image: null
+            }) }}
+        </main>
+    </div>
+</div>
+{% endblock %}

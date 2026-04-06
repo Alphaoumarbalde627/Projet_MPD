@@ -1,0 +1,167 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ produit.nom }}{% endblock %}
+
+{% block body %}
+<div class="min-h-screen bg-gradient-to-b from-blue-50 via-white to-blue-50">
+    {% include 'admin/partials/sidebar.html.twig' with { admin_sidebar_active: 'produits' } %}
+
+    <div class="mx-auto max-w-7xl px-5 py-8 lg:pl-80 lg:pr-8 lg:py-10">
+        <main>
+            {# Fil d'Ariane #}
+            <nav class="mb-6 flex items-center gap-2 text-sm text-slate-500">
+                <a href="{{ path('app_admin_produit_index') }}" class="font-medium text-blue-700 hover:underline">Produits</a>
+                <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                </svg>
+                <span>{{ produit.nom }}</span>
+            </nav>
+
+            <div class="grid grid-cols-1 gap-6 lg:grid-cols-3">
+                {# Image #}
+                <div class="lg:col-span-1">
+                    <div class="overflow-hidden rounded-xl border border-blue-100 bg-white shadow-sm">
+                        {% if produit.image %}
+                            <img src="{{ asset(produit.image) }}" alt="{{ produit.nom }}"
+                                 class="h-64 w-full object-cover lg:h-80">
+                        {% else %}
+                            <div class="flex h-64 w-full items-center justify-center bg-gradient-to-br from-blue-50 to-white lg:h-80">
+                                <svg class="h-20 w-20 text-blue-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1"
+                                          d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                                </svg>
+                            </div>
+                        {% endif %}
+                        <div class="p-4">
+                            <span class="inline-flex items-center rounded-full px-3 py-1 text-sm font-semibold
+                                {% if produit.estActif %}bg-green-100 text-green-700{% else %}bg-slate-100 text-slate-500{% endif %}">
+                                {% if produit.estActif %}● Actif{% else %}● Inactif{% endif %}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                {# Détails #}
+                <div class="space-y-5 lg:col-span-2">
+                    <div class="rounded-xl border border-blue-100 bg-white p-6 shadow-sm">
+                        <div class="mb-4 flex items-start justify-between">
+                            <div>
+                                <h2 class="text-2xl font-bold text-slate-800">{{ produit.nom }}</h2>
+                                <p class="mt-1 text-sm text-slate-400">Réf. {{ produit.reference }}{% if produit.marque %} · {{ produit.marque }}{% endif %}</p>
+                            </div>
+                            <p class="text-2xl font-extrabold text-blue-700">{{ produit.prix|number_format(0, ',', ' ') }} <span class="text-base font-semibold">GNF</span></p>
+                        </div>
+                        <p class="text-sm leading-relaxed text-slate-600">{{ produit.description }}</p>
+                    </div>
+
+                    <div class="rounded-xl border border-blue-100 bg-white p-6 shadow-sm">
+                        <h3 class="mb-4 text-sm font-semibold uppercase tracking-wide text-slate-500">Informations</h3>
+                        <dl class="grid grid-cols-2 gap-4">
+                            <div>
+                                <dt class="text-xs font-medium text-slate-400">Stock</dt>
+                                <dd class="mt-1">
+                                    <span class="inline-flex items-center rounded-full px-2.5 py-0.5 text-sm font-semibold
+                                        {% if produit.quantiteStock > 10 %}bg-green-100 text-green-700
+                                        {% elseif produit.quantiteStock > 0 %}bg-yellow-100 text-yellow-700
+                                        {% else %}bg-red-100 text-red-700{% endif %}">
+                                        {{ produit.quantiteStock }} unité(s)
+                                    </span>
+                                </dd>
+                            </div>
+                            <div>
+                                <dt class="text-xs font-medium text-slate-400">Catégorie</dt>
+                                <dd class="mt-1 text-sm font-medium text-slate-700">{{ produit.sousCategorie and produit.sousCategorie.category ? produit.sousCategorie.category.nom : '—' }}</dd>
+                            </div>
+                            <div>
+                                <dt class="text-xs font-medium text-slate-400">Sous-catégorie</dt>
+                                <dd class="mt-1 text-sm font-medium text-slate-700">{{ produit.sousCategorie ? produit.sousCategorie.nom : '—' }}</dd>
+                            </div>
+                            <div>
+                                <dt class="text-xs font-medium text-slate-400">Ajouté le</dt>
+                                <dd class="mt-1 text-sm font-medium text-slate-700">{{ produit.createdAt|date('d/m/Y') }}</dd>
+                            </div>
+                            <div>
+                                <dt class="text-xs font-medium text-slate-400">Mis à jour le</dt>
+                                <dd class="mt-1 text-sm font-medium text-slate-700">{{ produit.updatedAt|date('d/m/Y') }}</dd>
+                            </div>
+                        </dl>
+                    </div>
+
+                    {# Actions #}
+                    <div class="flex flex-wrap items-center gap-3">
+                        <a href="{{ path('app_admin_produit_edit', {id: produit.id}) }}"
+                           class="inline-flex items-center gap-2 rounded-lg bg-amber-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-amber-700">
+                            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                            </svg>
+                            Modifier
+                        </a>
+                        <button type="button"
+                                onclick="confirmerSuppression('{{ produit.nom }}', '{{ path('app_admin_produit_delete', {id: produit.id}) }}', '{{ csrf_token('delete_produit_' ~ produit.id) }}')"
+                                class="inline-flex items-center gap-2 rounded-lg bg-red-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-red-700">
+                            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                            </svg>
+                            Supprimer
+                        </button>
+                        <a href="{{ path('app_admin_produit_index') }}"
+                           class="inline-flex items-center gap-2 rounded-lg border border-slate-200 px-5 py-2.5 text-sm font-semibold text-slate-700 transition hover:bg-slate-50">
+                            Retour à la liste
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+
+{# Modal de confirmation de suppression #}
+<div id="modal-suppression" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/50 backdrop-blur-sm">
+    <div class="mx-4 w-full max-w-md rounded-2xl bg-white p-6 shadow-2xl">
+        <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-red-100">
+            <svg class="h-6 w-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+            </svg>
+        </div>
+        <h3 class="mb-2 text-lg font-bold text-slate-800">Confirmer la suppression</h3>
+        <p class="mb-6 text-sm text-slate-600">
+            Voulez-vous vraiment supprimer le produit <strong id="nom-produit" class="text-red-700"></strong> ?
+            Cette action est irréversible.
+        </p>
+        <form id="form-suppression" method="POST">
+            <input type="hidden" name="_token" id="csrf-suppression">
+            <div class="flex gap-3">
+                <button type="button" onclick="fermerModal()"
+                        class="flex-1 rounded-lg border border-slate-200 px-4 py-2.5 text-sm font-semibold text-slate-700 transition hover:bg-slate-50">
+                    Annuler
+                </button>
+                <button type="submit"
+                        class="flex-1 rounded-lg bg-red-600 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-red-700">
+                    Supprimer
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+function confirmerSuppression(nom, url, token) {
+    document.getElementById('nom-produit').textContent = nom;
+    document.getElementById('form-suppression').action = url;
+    document.getElementById('csrf-suppression').value = token;
+    const modal = document.getElementById('modal-suppression');
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+}
+
+function fermerModal() {
+    const modal = document.getElementById('modal-suppression');
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
+}
+
+document.getElementById('modal-suppression').addEventListener('click', function(e) {
+    if (e.target === this) fermerModal();
+});
+</script>
+{% endblock %}
