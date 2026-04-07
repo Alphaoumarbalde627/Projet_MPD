@@ -5,12 +5,120 @@
 {% block body %}
 {% include 'partials/headers.html.twig' %}
 
-<div class="min-h-screen bg-gray-100 pt-16">
-    <div class="max-w-4xl mx-auto px-4 py-8">
+<div class="min-h-screen bg-gray-50 pt-16">
+    <div class="max-w-6xl mx-auto px-4 py-8">
         <h1 class="text-3xl font-bold text-gray-900 mb-8">Mon Panier</h1>
 
-        <!-- TODO: Contenu du panier -->
-        <p class="text-gray-600">Votre panier est vide pour le moment.</p>
+        {% if cart_items is empty %}
+            <div class="text-center py-12">
+                <svg class="mx-auto h-24 w-24 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
+                </svg>
+                <h2 class="mt-4 text-xl font-semibold text-gray-900">Votre panier est vide</h2>
+                <p class="mt-2 text-gray-600">Ajoutez des produits à votre panier pour commencer vos achats.</p>
+                <a href="{{ path('app_produit_index') }}" class="mt-6 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700">
+                    Continuer mes achats
+                </a>
+            </div>
+        {% else %}
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Liste des produits -->
+                <div class="lg:col-span-2">
+                    <div class="bg-white rounded-lg shadow-sm border">
+                        <div class="p-6">
+                            <h2 class="text-lg font-semibold text-gray-900 mb-4">Articles dans votre panier</h2>
+                            <div class="space-y-4">
+                                {% for item in cart_items %}
+                                    <div class="flex items-center space-x-4 py-4 border-b border-gray-200 last:border-b-0">
+                                        <div class="flex-shrink-0 w-16 h-16 bg-gray-200 rounded-md overflow-hidden">
+                                            {% if item.produit.image %}
+                                                <img src="{{ asset(item.produit.image) }}" alt="{{ item.produit.nom }}" class="w-full h-full object-cover">
+                                            {% else %}
+                                                <div class="w-full h-full flex items-center justify-center text-gray-400">
+                                                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                                                    </svg>
+                                                </div>
+                                            {% endif %}
+                                        </div>
+                                        <div class="flex-1">
+                                            <h3 class="text-sm font-medium text-gray-900">{{ item.produit.nom }}</h3>
+                                            <p class="text-sm text-gray-500">{{ item.produit.marque }}</p>
+                                            <p class="text-sm font-medium text-gray-900">{{ item.prix_unitaire|number_format(0, ',', ' ') }} GNF</p>
+                                        </div>
+                                        <div class="flex items-center space-x-2">
+                                            <form action="{{ path('app_cart_update', {id: item.produit.id}) }}" method="post" class="flex items-center">
+                                                <button type="button" onclick="updateQuantity({{ item.produit.id }}, {{ item.quantite - 1 }})" class="p-1 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100">
+                                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"/>
+                                                    </svg>
+                                                </button>
+                                                <input type="number" name="quantity" value="{{ item.quantite }}" min="1" max="{{ item.produit.quantiteStock }}" class="w-16 text-center border border-gray-300 rounded-md px-2 py-1 text-sm" onchange="this.form.submit()">
+                                                <button type="button" onclick="updateQuantity({{ item.produit.id }}, {{ item.quantite + 1 }})" class="p-1 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100">
+                                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                                                    </svg>
+                                                </button>
+                                            </form>
+                                        </div>
+                                        <div class="text-right">
+                                            <p class="text-sm font-medium text-gray-900">{{ item.sous_total|number_format(0, ',', ' ') }} GNF</p>
+                                            <a href="{{ path('app_cart_remove', {id: item.produit.id}) }}" class="text-sm text-red-600 hover:text-red-800">Supprimer</a>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Résumé et validation -->
+                <div class="lg:col-span-1">
+                    <div class="bg-white rounded-lg shadow-sm border p-6">
+                        <h2 class="text-lg font-semibold text-gray-900 mb-4">Résumé de la commande</h2>
+                        <div class="space-y-2">
+                            <div class="flex justify-between text-sm">
+                                <span>Sous-total</span>
+                                <span>{{ total|number_format(0, ',', ' ') }} GNF</span>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <span>Livraison</span>
+                                <span>À définir</span>
+                            </div>
+                            <div class="border-t pt-2">
+                                <div class="flex justify-between text-lg font-semibold">
+                                    <span>Total</span>
+                                    <span>{{ total|number_format(0, ',', ' ') }} GNF</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-6 space-y-3">
+                            <a href="{{ path('app_cart_checkout') }}" class="w-full bg-blue-600 text-white py-3 px-4 rounded-md font-medium hover:bg-blue-700 flex items-center justify-center">
+                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                </svg>
+                                Valider la commande
+                            </a>
+                            <a href="{{ path('app_cart_clear') }}" class="w-full bg-gray-200 text-gray-800 py-3 px-4 rounded-md font-medium hover:bg-gray-300 flex items-center justify-center" onclick="return confirm('Êtes-vous sûr de vouloir vider votre panier ?')">
+                                Vider le panier
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
     </div>
 </div>
+
+<script>
+function updateQuantity(productId, newQuantity) {
+    if (newQuantity < 1) return;
+    const form = document.querySelector(`form[action*="${productId}"]`);
+    const input = form.querySelector('input[name="quantity"]');
+    input.value = newQuantity;
+    form.submit();
+}
+</script>
+
+{% include 'partials/footer.html.twig' ignore missing %}
 {% endblock %}
