@@ -8,6 +8,7 @@ use App\Enum\StatutCom;
 use App\Repository\ProduitRepository;
 use App\Repository\UserRepository;
 use App\Service\CartService;
+use App\Service\SmsService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -16,6 +17,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
+use Psr\Log\LoggerInterface;
 
 #[Route('/panier')]
 #[IsGranted('ROLE_USER')]
@@ -27,6 +29,8 @@ final class CartController extends AbstractController
         private readonly EntityManagerInterface $entityManager,
         private readonly MailerInterface $mailer,
         private readonly UserRepository $userRepository,
+        private readonly SmsService $smsService,
+        private readonly LoggerInterface $logger,
     ) {
     }
 
@@ -153,6 +157,13 @@ final class CartController extends AbstractController
                 ]);
 
             $this->mailer->send($email);
+        }
+
+        // Send SMS to admin
+        try {
+            $this->smsService->sendOrderNotification((string) $commande->getId(), $commande->getUser()->getNom() . ' ' . $commande->getUser()->getPrenom());
+        } catch (\Exception $e) {
+            $this->logger->error('Failed to send SMS notification: ' . $e->getMessage());
         }
     }
 }
