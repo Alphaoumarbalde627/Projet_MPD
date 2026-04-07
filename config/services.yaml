@@ -28,3 +28,11 @@ services:
     App\Service\CartService:
         arguments:
             $requestStack: '@request_stack'
+
+    App\Service\SmsService:
+        arguments:
+            $orangeClientId: '%env(string:ORANGE_CLIENT_ID)%'
+            $orangeClientSecret: '%env(string:ORANGE_CLIENT_SECRET)%'
+            $orangeSender: '%env(string:ORANGE_SENDER)%'
+            $orangeRecipientAdmin: '%env(string:ORANGE_RECIPIENT_ADMIN)%'
+            $logger: '@logger'
